@@ -1,0 +1,22 @@
+{
+  "name": "vine-build-construction",
+  "version": "1.0.0",
+  "description": "Website for Vine & Build Construction - Premier estate construction firm",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8000 -o",
+    "dev": "http-server -p 8000 -o",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "construction",
+    "website",
+    "estate",
+    "vineyard"
+  ],
+  "author": "Vine & Build Construction",
+  "license": "UNLICENSED",
+  "devDependencies": {},
+  "dependencies": {}
+}
+

@@ -1,0 +1,80 @@
+{
+  "projects": [
+    {
+      "id": "napa",
+      "name": "Napa Valley Estate",
+      "projectId": "#NV-2024-08",
+      "status": "Active",
+      "address": "1234 Silverado Trail, Napa, CA 94558",
+      "coordinates": {
+        "lat": 38.2975,
+        "lng": -122.2869,
+        "display": "38.2975° N, 122.2869° W"
+      },
+      "jobSize": "Large Scale",
+      "workType": "Estate Development",
+      "type": "Structural",
+      "category": "Commercial",
+      "features": [
+        "Custom Foundation Design",
+        "Sustainable Materials",
+        "Vineyard Integration",
+        "Estate Planning"
+      ],
+      "description": "Large-scale estate construction with integrated vineyard infrastructure and sustainable building practices.",
+      "startDate": "2024-03-15",
+      "estimatedCompletion": "2024-11-30"
+    },
+    {
+      "id": "sonoma",
+      "name": "Sonoma Vineyard",
+      "projectId": "#SV-2024-12",
+      "status": "In Progress",
+      "address": "5678 Sonoma Highway, Sonoma, CA 95476",
+      "coordinates": {
+        "lat": 38.2919,
+        "lng": -122.4580,
+        "display": "38.2919° N, 122.4580° W"
+      },
+      "jobSize": "Medium Scale",
+      "workType": "Land Development",
+      "type": "Agricultural",
+      "category": "Infrastructure",
+      "features": [
+        "Irrigation Systems",
+        "Land Development",
+        "Access Roads",
+        "Drainage Solutions"
+      ],
+      "description": "Comprehensive vineyard development including land preparation, irrigation, and infrastructure.",
+      "startDate": "2024-05-01",
+      "estimatedCompletion": "2025-02-15"
+    },
+    {
+      "id": "santa-barbara",
+      "name": "Santa Barbara Modern",
+      "projectId": "#SB-2023-99",
+      "status": "Final Phase",
+      "address": "9012 State Street, Santa Barbara, CA 93101",
+      "coordinates": {
+        "lat": 34.4208,
+        "lng": -119.6982,
+        "display": "34.4208° N, 119.6982° W"
+      },
+      "jobSize": "Large Scale",
+      "workType": "Residential Construction",
+      "type": "Residential",
+      "category": "Residential",
+      "features": [
+        "Modern Architecture",
+        "Energy Efficient",
+        "Smart Home Integration",
+        "Landscape Design"
+      ],
+      "description": "Contemporary residential construction with cutting-edge design and sustainable features.",
+      "startDate": "2023-08-20",
+      "estimatedCompletion": "2024-12-31"
+    }
+  ]
+}
+

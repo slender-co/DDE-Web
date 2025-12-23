@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vine & Build Construction</title>
+    <meta name="description" content="Premier estate construction firm specializing in custom builds, vineyard construction, and sustainable development. From first sketch to final coat.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Leaflet Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/theme.css">
+</head>
+<body class="antialiased selection:bg-[#FFC107]/30 selection:text-[#F57C00] overflow-x-hidden text-stone-800 bg-[#F4F1EA]">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 w-full p-4 md:p-6 transition-all duration-300" id="header">
+        <div class="max-w-[1920px] mx-auto bg-white/90 backdrop-blur-md border border-stone-200/50 rounded-xl px-6 py-4 flex justify-between items-center shadow-lg shadow-stone-900/5">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                <div class="flex flex-col leading-none">
+                    <span class="font-bold tracking-tight text-lg text-stone-900 heading-font uppercase">Dirt Dudes Excavating INC.
+                    </span>
+                    <span class="text-[10px] tracking-widest text-stone-500 font-semibold italic uppercase">For Over 40 Years</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="home">Home</a>
+                <a href="#about" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="about">About</a>
+                <a href="services.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="services">Services</a>
+                <a href="#projects" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="projects">Projects</a>
+                <a href="#locations" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="locations">Active Sites</a>
+                <a href="altadena.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="altadena">Altadena</a>
+            </nav>
+
+            <a href="#contact" class="hidden md:flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#FFC107] text-white text-xs font-bold px-6 py-3 rounded-lg uppercase tracking-widest transition-all duration-300 shadow-lg">
+                <span>Get A Quote</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+            
+            <button class="md:hidden text-stone-900" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-white z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
+            <div class="p-6 pt-24">
+                <button class="absolute top-6 right-6 text-stone-900" id="mobile-menu-close" aria-label="Close menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x w-6 h-6"><path d="M18 6 6 18"></path><path d="M6 6l12 12"></path></svg>
+                </button>
+                <nav class="flex flex-col gap-6">
+                    <a href="index.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="home">Home</a>
+                    <a href="#about" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="about">About</a>
+                    <a href="services.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="services">Services</a>
+                    <a href="#projects" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="projects">Projects</a>
+                    <a href="#locations" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="locations">Active Sites</a>
+                    <a href="altadena.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="altadena">Altadena</a>
+                    <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#FFC107] text-white text-sm font-bold px-6 py-3 rounded-lg uppercase tracking-widest transition-all duration-300 mt-4 mobile-nav-link">Get A Quote</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="h-screen flex flex-col md:px-16 overflow-hidden w-full max-w-[1920px] mr-auto ml-auto pt-20 pr-6 pb-6 pl-6 relative justify-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 -z-10">
+            <img src="images/thumbnail_image_123650291.jpg" alt="Construction Background" class="w-full h-full object-cover object-bottom sepia-[0.2]">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#F4F1EA]/95 via-[#F4F1EA]/70 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#F4F1EA] via-transparent to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10 pt-4">
+            <div class="max-w-3xl">
+                <div class="flex items-center gap-3 mb-4 js-fade-element opacity-0 translate-y-4">
+                    <span class="px-3 py-1 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-md text-xs font-bold text-[#FFC107] tracking-widest uppercase">Dedication to Craftsmanship</span>
+                </div>
+                
+                <!-- Animated Title Structure -->
+                <h1 class="text-[#1a1a1a] text-5xl md:text-6xl leading-[0.9] tracking-tight mb-4 font-bold uppercase drop-shadow-sm mix-blend-multiply">
+                    <span class="clip-text-line">
+                        <span class="reveal-text">From Our</span>
+                    </span>
+                    <span class="clip-text-line">
+                        <span class="reveal-text text-[#FFC107]">Family</span>
+                    </span>
+                    <span class="clip-text-line">
+                        <span class="reveal-text">To Yours</span>
+                    </span>
+                </h1>
+
+                <p class="js-fade-element opacity-0 translate-y-4 text-stone-600 text-base md:text-lg font-medium leading-relaxed max-w-lg mb-6 border-l-4 border-[#FFC107] pl-4">
+                    A family-owned excavation company providing site work, grading, and concrete services for residential and commercial projects for over four decades..
+                </p>
+                
+                <div class="js-fade-element opacity-0 translate-y-4 flex flex-col sm:flex-row gap-3">
+                    <a href="#contact" class="inline-flex justify-center items-center gap-2 hover:bg-stone-50 hover:shadow-lg transition-all duration-300 uppercase text-xs font-bold text-stone-900 tracking-widest bg-white border-stone-200 border rounded-md py-3 px-6 shadow-md">
+                        Start Project
+                    </a>
+                    <a href="#projects" class="inline-flex justify-center items-center gap-2 bg-[#FFC107] hover:bg-[#FFA000] text-[#1a1a1a] px-6 py-3 rounded-md shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest font-bold text-xs">
+                        View Our Work
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Stats -->
+        <div class="js-fade-element opacity-0 translate-y-8 hidden md:flex md:p-8 bg-white max-w-3xl border-stone-100 rounded-tl-3xl border-t border-l pt-6 pr-6 pb-6 pl-6 absolute right-0 bottom-0 shadow-[-10px_-10px_30px_rgba(0,0,0,0.05)]">
+            <div class="flex gap-8">
+                <div>
+                    <span class="block text-3xl font-bold text-[#FFC107] heading-font mb-1">350+</span>
+                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Projects Done</span>
+                </div>
+                <div class="w-px bg-stone-200 h-10 self-center"></div>
+                <div>
+                    <span class="block text-3xl font-bold text-[#FFC107] heading-font mb-1">100+</span>
+                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Satisfied Customers</span>
+                </div>
+                <div class="w-px bg-stone-200 h-10 self-center"></div>
+                <div>
+                    <span class="block text-3xl font-bold text-[#FFC107] heading-font mb-1">40+</span>
+                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- About / Intro Section -->
+    <section class="bg-white z-20 pt-24 pb-24 relative" id="about">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-[#FFC107]/10 rounded-full blur-2xl"></div>
+                    <img src="images/good-pour-sthelena.jpg" class="rounded-lg shadow-2xl relative z-10 w-full object-cover h-[500px] grayscale hover:grayscale-0 transition-all duration-700" alt="Construction team at work">
+                    <div class="absolute -bottom-6 -right-6 bg-[#1a1a1a] p-6 rounded-lg shadow-xl z-20 hidden md:block">
+                        <p class="text-white text-sm font-medium italic">"Building the future, restoring the past."</p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-px w-8 bg-[#FFC107]"></span>
+                        <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs">Who We Are</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6 uppercase leading-tight">Consistent, <span class="text-[#FFC107]">dependable</span> <span class="text-[#FFC107]">workmanship</span> backed by <span class="text-[#FFC107]">accountability</span> on every project.</h2>
+                    <p class="text-stone-600 mb-6 leading-relaxed">
+                        Dirt Dudes is a family-owned excavation company built on decades of hands-on experience. From grading and site preparation to foundation work, we approach every project with a steady, professional process and a commitment to doing things right.
+                    </p>
+                    <ul class="space-y-4 mt-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-[#FFC107]/10 flex items-center justify-center text-[#FFC107]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-3.5 h-3.5 stroke-[3]"><path d="M20 6 9 17l-5-5"></path></svg>
+                            </div>
+                            <span class="text-stone-800 font-semibold text-sm">Licensed & Insured for Any Project</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-[#FFC107]/10 flex items-center justify-center text-[#FFC107]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-3.5 h-3.5 stroke-[3]"><path d="M20 6 9 17l-5-5"></path></svg>
+                            </div>
+                            <span class="text-stone-800 font-semibold text-sm">Specialized in Urban Solutions</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-[#FFC107]/10 flex items-center justify-center text-[#FFC107]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-3.5 h-3.5 stroke-[3]"><path d="M20 6 9 17l-5-5"></path></svg>
+                            </div>
+                            <span class="text-stone-800 font-semibold text-sm">Vertically Integrated Services</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="expertise" class="py-24 bg-[#1a1a1a] text-white relative overflow-hidden">
+        <!-- Texture Overlay -->
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 border-b border-white/10 pb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="hard-hat" class="lucide lucide-hard-hat text-[#FFC107] w-5 h-5"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"></path><path d="M14 6a6 6 0 0 1 6 6v3"></path><path d="M4 15v-3a6 6 0 0 1 6-6"></path><rect x="2" y="15" width="20" height="4" rx="1"></rect></svg>
+                        <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs">What We Do</span>
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-bold uppercase text-white">Our Services</h2>
+                </div>
+                <p class="text-stone-400 max-w-md text-right md:text-left mb-2">
+                    We handle a wide range of estate projects — done with care, done the right way.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Grading & Land Development -->
+                <a href="services.html#grading" class="group bg-[#222] border border-white/5 hover:border-[#FFC107] transition-all duration-300 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="images/grading-img.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Grading and land development">
+                        <div class="absolute top-4 right-4 bg-[#FFC107] text-[#1a1a1a] p-2 rounded shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mountain" class="lucide lucide-mountain"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-[#FFC107] transition-colors">Grading & Land Development</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-6">Professional land preparation and site development services to transform raw land into build-ready sites with precision and expertise.</p>
+                        <span class="text-xs font-bold text-[#FFC107] uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Read More <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-3 h-3"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Concrete -->
+                <a href="services.html#concrete" class="group bg-[#222] border border-white/5 hover:border-[#FFC107] transition-all duration-300 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="images/fines-good-foundation.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Concrete work">
+                        <div class="absolute top-4 right-4 bg-[#FFC107] text-[#1a1a1a] p-2 rounded shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" class="lucide lucide-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-[#FFC107] transition-colors">Concrete</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-6">Complete concrete solutions from foundation work to decorative finishes. Durable, high-quality work that stands the test of time.</p>
+                        <span class="text-xs font-bold text-[#FFC107] uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Read More <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-3 h-3"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Utility Installation -->
+                <a href="services.html#utility" class="group bg-[#222] border border-white/5 hover:border-[#FFC107] transition-all duration-300 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="images/utility-sac.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Utility installation">
+                        <div class="absolute top-4 right-4 bg-[#FFC107] text-[#1a1a1a] p-2 rounded shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .78-.01l9.9 10.2a1 1 0 0 1-.78 1.64z"></path><path d="M4 20h16"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-[#FFC107] transition-colors">Utility Installation</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-6">Complete underground utility installation including water, sewer, electrical, and gas connections with precision and code compliance.</p>
+                        <span class="text-xs font-bold text-[#FFC107] uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Read More <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-3 h-3"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Comprehensive Site Services -->
+                <a href="services.html#comprehensive" class="group bg-[#222] border border-white/5 hover:border-[#FFC107] transition-all duration-300 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="images/hbg-start.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" alt="Site services">
+                        <div class="absolute top-4 right-4 bg-[#FFC107] text-[#1a1a1a] p-2 rounded shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wrench" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-[#FFC107] transition-colors">Site Services</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-6">From asphalt paving to pier drilling, topographic surveys to specialized earthwork—there's virtually no site work challenge we can't handle.</p>
+                        <span class="text-xs font-bold text-[#FFC107] uppercase tracking-widest flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Read More <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-3 h-3"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="services.html" class="inline-block bg-white text-stone-900 font-bold uppercase tracking-widest text-xs px-8 py-4 rounded hover:bg-stone-200 transition-colors">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before/After Slider -->
+    <section id="projects" class="py-24 bg-[#F4F1EA] border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16">
+                <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs mb-2 block">Transformations</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] uppercase">Witness the Impact</h2>
+                <div class="h-1 w-20 bg-[#FFC107] mx-auto mt-6"></div>
+            </div>
+
+            <div class="relative w-full h-[50vh] md:h-[650px] rounded-xl overflow-hidden group select-none shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-4 border-white ring-1 ring-stone-200">
+                <div class="absolute inset-0">
+                    <img src="images/hbg-pour-good.jpg" class="w-full h-full object-cover" alt="Finished project">
+                    <span class="absolute top-6 right-6 bg-[#1a1a1a] px-4 py-2 rounded text-xs font-bold text-white tracking-widest shadow-lg">FINISHED PROJECT</span>
+                </div>
+                <div class="absolute inset-0 w-[50%] overflow-hidden border-r-4 border-[#FFC107]" id="before-layer">
+                    <div class="w-[100vw] max-w-7xl h-full relative"> 
+                         <img src="images/hbg-initial.jpg" class="absolute top-0 left-0 w-full h-full object-cover grayscale brightness-90 sepia-[.3]" alt="Initial plan">
+                    </div>
+                    <span class="absolute top-6 left-6 bg-white px-4 py-2 rounded text-xs font-bold text-[#1a1a1a] tracking-widest shadow-lg">INITIAL PLAN</span>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" id="slider-range" aria-label="Before and after slider">
+                <div class="absolute inset-y-0 left-[50%] w-0 z-20 pointer-events-none flex items-center justify-center" id="slider-line">
+                    <div class="w-12 h-12 bg-[#FFC107] rounded-full flex items-center justify-center shadow-2xl text-[#1a1a1a] border-4 border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-left-right" class="lucide lucide-arrow-left-right w-5 h-5"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="py-24 bg-white border-b border-stone-100">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs mb-2 block">Why Choose Us</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] uppercase mb-4">What Sets Us Apart</h2>
+                    <p class="text-stone-600 text-lg leading-relaxed">Four decades of proven performance, built on relationships that span generations. We're not just contractors—we're your partners in building something that lasts.</p>
+                </div>
+                <div class="flex items-end">
+                    <div class="bg-[#F4F1EA] p-8 rounded-xl border border-stone-200 w-full">
+                        <p class="text-stone-700 text-base leading-relaxed italic">"Our reputation isn't built on promises—it's built on delivering, project after project, year after year. When you work with Dirt Dudes, you're working with a family business that treats your project like our own."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1: Proven Track Record -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" class="lucide lucide-award w-7 h-7"><path d="m15.477 12.89 1.515 8.526a1 1 0 0 1-1.317 1.022L12 20.5 8.325 22.438a1 1 0 0 1-1.317-1.022l1.515-8.526L2.3 9.5a1 1 0 0 1 .129-1.495l8.528-1.515L12.5 1.5a1 1 0 0 1 1.5 0l1.543 7.99 8.528 1.515a1 1 0 0 1 .129 1.495z"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">Proven Track Record</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">With over 40 years in California's construction industry, we've completed thousands of projects across residential, commercial, and agricultural sectors. Our longevity speaks to our reliability, quality, and commitment to doing business the right way.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">500+ Projects Completed</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 2: Financial Stability & Bonding -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" class="lucide lucide-shield-check w-7 h-7"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">Fully Licensed & Bonded</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">We maintain comprehensive licensing, bonding, and insurance coverage that protects both our clients and our operations. Our financial stability means your project is secure from start to finish, with no risk of contractor default or incomplete work.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Complete Coverage</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 3: Multi-Generational Expertise -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" class="lucide lucide-users w-7 h-7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">Multi-Generational Expertise</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">As a family-owned business, we've built institutional knowledge that spans generations. Our team combines time-tested methods with modern techniques, ensuring every project benefits from decades of accumulated wisdom and innovation.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Family Values, Professional Results</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 4: Local Knowledge & Relationships -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin w-7 h-7"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">Deep Local Knowledge</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">Four decades of working in California means we understand local soil conditions, climate challenges, permit processes, and regulatory requirements. We've built relationships with suppliers, inspectors, and officials that streamline your project and prevent costly delays.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">California Native Expertise</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 5: Project Management Excellence -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clipboard-check" class="lucide lucide-clipboard-check w-7 h-7"><rect x="9" y="2" width="6" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">On-Time, On-Budget Delivery</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">We understand that time is money. Our project management approach combines detailed planning, proactive communication, and efficient resource allocation to ensure projects are completed on schedule and within budget. We track progress daily and address issues before they become problems.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Proactive Management</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 6: Comprehensive Service Capabilities -->
+                <div class="p-8 bg-[#F4F1EA] rounded-xl hover:bg-[#FDFCF8] border border-transparent hover:border-[#FFC107]/30 transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center text-[#FFC107] shadow-sm mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wrench" class="lucide lucide-wrench w-7 h-7"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-[#1a1a1a] mb-3 uppercase text-base">End-to-End Capabilities</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">From initial site preparation and grading through utility installation and concrete work, we handle every phase of your project. This integrated approach eliminates coordination headaches, reduces delays, and ensures seamless execution from groundbreaking to completion.</p>
+                    <div class="pt-4 border-t border-stone-200">
+                        <p class="text-xs text-stone-500 font-semibold uppercase tracking-wider">Single-Source Solution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Project Map -->
+    <section id="locations" class="py-24 bg-[#111]">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold text-white uppercase tracking-tight mb-2">Active Sites</h2>
+                    <p class="text-stone-400 text-sm md:text-base max-w-2xl">Real-time status of our past, current, and ongoing developments.</p>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full border border-stone-800 bg-[#1a1a1a]">
+                    <div class="w-2 h-2 rounded-full bg-[#FFC107] animate-pulse"></div>
+                    <span class="text-[10px] font-bold tracking-widest text-stone-400 uppercase">System Online</span>
+                </div>
+            </div>
+
+            <!-- Dashboard Container -->
+            <div class="rounded-2xl overflow-hidden border border-white/10 bg-[#161616] shadow-2xl" style="height: 700px;">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 h-full">
+                    
+                    <!-- Sidebar -->
+                    <div class="col-span-1 border-r border-white/5 bg-[#181818] flex flex-col relative z-20">
+                        <div class="p-5 border-b border-white/5 flex justify-between items-center bg-[#1a1a1a]">
+                            <span class="text-xs font-bold text-stone-500 uppercase tracking-wider" id="sidebar-title">Project Index</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="list-filter" class="lucide lucide-list-filter w-4 h-4 text-stone-600"><path d="M2 5h20"></path><path d="M6 12h12"></path><path d="M9 19h6"></path></svg>
+                        </div>
+
+                        <!-- View Toggle in Sidebar -->
+                        <div class="p-4 border-b border-white/5 bg-[#1a1a1a] space-y-3">
+                            <div class="flex items-center gap-2 bg-[#181818] border border-white/10 rounded-lg p-1">
+                                <button id="view-index-btn" class="flex-1 px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-[#FFC107] transition-all">
+                                    Project Index
+                                </button>
+                                <button id="view-summary-btn" class="flex-1 px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-stone-400 hover:text-white transition-all">
+                                    Summary
+                                </button>
+                            </div>
+                            <!-- Category Filter Tabs -->
+                            <div id="category-filters" class="flex flex-wrap gap-2">
+                                <button class="category-filter-btn active px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-wider text-white bg-[#FFC107]/20 border border-[#FFC107]/30 transition-all" data-category="all">
+                                    All
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Project Index List View -->
+                        <div id="project-index-view" class="overflow-y-auto flex-1 no-scrollbar">
+                            <div id="project-list" class="h-full">
+                                <!-- Projects will be dynamically loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Summary Cards View -->
+                        <div id="summary-view" class="overflow-y-auto flex-1 no-scrollbar hidden">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white uppercase mb-6">All Projects Summary</h3>
+                                <div id="summary-grid" class="space-y-4">
+                                    <!-- Summary cards will be dynamically loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map View (Always Visible) -->
+                    <div id="map-view" class="col-span-1 lg:col-span-2 relative bg-[#121212] overflow-hidden">
+                        <div id="map-container" class="absolute inset-0 w-full h-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative z-30 bg-[#F4F1EA] py-24 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+                <div class="md:col-span-5">
+                    <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs mb-2 block">Get In Touch</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-6 uppercase leading-none">Let's Talk About Your Project</h2>
+                    <p class="text-stone-600 mb-10 text-lg leading-relaxed">Fill out the form to request a free quote. We'll review your project details and follow up with next steps.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-[#FFC107] group-hover:bg-[#FFC107] group-hover:text-[#1a1a1a] transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin w-5 h-5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#1a1a1a] uppercase text-sm">Northern California HQ</h4>
+                                <p class="text-stone-500 text-sm mt-1">Santa Rosa, CA 95403</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-[#FFC107] group-hover:bg-[#FFC107] group-hover:text-[#1a1a1a] transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin w-5 h-5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#1a1a1a] uppercase text-sm">Southern California HQ</h4>
+                                <p class="text-stone-500 text-sm mt-1">918 E Green St, Pasadena, CA 91106</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-[#FFC107] group-hover:bg-[#FFC107] group-hover:text-[#1a1a1a] transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" class="lucide lucide-phone w-5 h-5"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#1a1a1a] uppercase text-sm">Phone</h4>
+                                <a href="tel:+17074839546" class="text-stone-500 text-sm mt-1 hover:text-[#FFC107] transition-colors">+1 (707) 483-9546</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 bg-white border border-stone-200 rounded-lg flex items-center justify-center text-[#FFC107] group-hover:bg-[#FFC107] group-hover:text-[#1a1a1a] transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#1a1a1a] uppercase text-sm">Email</h4>
+                                <a href="mailto:info@dirtdudesexcavating.com" class="text-stone-500 text-sm mt-1 hover:text-[#FFC107] transition-colors">info@dirtdudesexcavating.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7">
+                    <form class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border-t-4 border-[#FFC107] space-y-6" id="contact-form">
+                        <div id="form-message" class="hidden p-4 rounded-lg mb-4"></div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="firstName" class="text-xs font-bold uppercase tracking-wider text-stone-500">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required class="w-full bg-[#F9F9F9] border border-stone-200 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:bg-white transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="lastName" class="text-xs font-bold uppercase tracking-wider text-stone-500">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required class="w-full bg-[#F9F9F9] border border-stone-200 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:bg-white transition-all">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="email" class="text-xs font-bold uppercase tracking-wider text-stone-500">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full bg-[#F9F9F9] border border-stone-200 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:bg-white transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="phone" class="text-xs font-bold uppercase tracking-wider text-stone-500">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="w-full bg-[#F9F9F9] border border-stone-200 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:bg-white transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="projectDetails" class="text-xs font-bold uppercase tracking-wider text-stone-500">Project Details</label>
+                            <textarea id="projectDetails" name="projectDetails" rows="4" required class="w-full bg-[#F9F9F9] border border-stone-200 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:bg-white transition-all"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-[#1a1a1a] hover:bg-[#FFC107] text-white hover:text-[#1a1a1a] font-bold uppercase tracking-widest py-4 rounded transition-colors flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span id="submit-text">Send Request</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send w-4 h-4"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#1a1a1a] text-stone-400 py-16 border-t border-stone-800 text-sm">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                        <span class="font-bold tracking-tight text-lg uppercase heading-font text-white">Dirt Dudes Excavating</span>
+                    </div>
+                    <p class="max-w-xs text-xs text-stone-500 mb-6 leading-relaxed">Constructing the future one project at a time. Serving California for over 40 years.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.89 2.89 0 0 1 .88.13V9.4a6.07 6.07 0 0 0-1-.05A6.1 6.1 0 0 0 5 12.28a6.1 6.1 0 0 0 10.86 4.06v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.18z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html#grading" class="text-stone-500 hover:text-white text-xs transition-colors">Grading & Land Development</a></li>
+                        <li><a href="services.html#concrete" class="text-stone-500 hover:text-white text-xs transition-colors">Concrete</a></li>
+                        <li><a href="services.html#utility" class="text-stone-500 hover:text-white text-xs transition-colors">Utility Installation</a></li>
+                        <li><a href="services.html#comprehensive" class="text-stone-500 hover:text-white text-xs transition-colors">Site Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#about" class="text-stone-500 hover:text-white text-xs transition-colors">About Us</a></li>
+                        <li><a href="index.html#projects" class="text-stone-500 hover:text-white text-xs transition-colors">Projects</a></li>
+                        <li><a href="index.html#locations" class="text-stone-500 hover:text-white text-xs transition-colors">Active Sites</a></li>
+                        <li><a href="altadena.html" class="text-stone-500 hover:text-white text-xs transition-colors">Altadena Operations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Contact</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#contact" class="text-stone-500 hover:text-white text-xs transition-colors">Get A Quote</a></li>
+                        <li class="text-stone-500 text-xs">Northern California</li>
+                        <li class="text-stone-500 text-xs">Southern California</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-stone-600 text-xs">© 2024 Dirt Dudes Excavating INC. All rights reserved.</div>
+                <div class="flex gap-6 text-xs text-stone-600">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/form-handler.js"></script>
+    <script src="js/map-interactive.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Recovery & Rebuilding - Dirt Dudes Excavating</title>
+    <meta name="description" content="Dedicated to rebuilding Southern California communities from devastating fires. Our new office and operations are committed to restoring the land and community.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Leaflet Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/theme.css">
+</head>
+<body class="antialiased selection:bg-[#FFC107]/30 selection:text-[#F57C00] overflow-x-hidden text-stone-800 bg-[#F4F1EA]">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 w-full p-4 md:p-6 transition-all duration-300" id="header">
+        <div class="max-w-[1920px] mx-auto bg-white/90 backdrop-blur-md border border-stone-200/50 rounded-xl px-6 py-4 flex justify-between items-center shadow-lg shadow-stone-900/5">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                <div class="flex flex-col leading-none">
+                    <span class="font-bold tracking-tight text-lg text-stone-900 heading-font uppercase">Dirt Dudes Excavating INC.</span>
+                    <span class="text-[10px] tracking-widest text-stone-500 font-semibold italic uppercase">For Over 40 Years</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="home">Home</a>
+                <a href="index.html#about" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="about">About</a>
+                <a href="services.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="services">Services</a>
+                <a href="index.html#projects" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="projects">Projects</a>
+                <a href="index.html#locations" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="locations">Active Sites</a>
+                <a href="altadena.html" class="nav-link text-sm font-semibold text-[#FFC107] hover:text-[#FFA000] transition-colors uppercase tracking-wide border-b-2 border-[#FFC107]" data-nav="altadena">Altadena</a>
+            </nav>
+
+            <a href="index.html#contact" class="hidden md:flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#FFC107] text-white text-xs font-bold px-6 py-3 rounded-lg uppercase tracking-widest transition-all duration-300 shadow-lg">
+                <span>Get A Quote</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+            
+            <button class="md:hidden text-stone-900" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-white z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
+            <div class="p-6 pt-24">
+                <button class="absolute top-6 right-6 text-stone-900" id="mobile-menu-close" aria-label="Close menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x w-6 h-6"><path d="M18 6 6 18"></path><path d="M6 6l12 12"></path></svg>
+                </button>
+                <nav class="flex flex-col gap-6">
+                    <a href="index.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="home">Home</a>
+                    <a href="index.html#about" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="about">About</a>
+                    <a href="services.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="services">Services</a>
+                    <a href="index.html#projects" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="projects">Projects</a>
+                    <a href="index.html#locations" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="locations">Active Sites</a>
+                    <a href="altadena.html" class="text-lg font-semibold text-[#FFC107] hover:text-[#FFA000] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="altadena">Altadena</a>
+                    <a href="index.html#contact" class="inline-flex items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#FFC107] text-white text-sm font-bold px-6 py-3 rounded-lg uppercase tracking-widest transition-all duration-300 mt-4 mobile-nav-link">Get A Quote</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+        <!-- Background with overlay -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#111] via-[#1a1a1a] to-[#111]"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,193,7,0.1),transparent_50%)]"></div>
+        </div>
+
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-[#FFC107]/5 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#FFC107]/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-full mb-8 js-fade-element opacity-0 translate-y-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-4 h-4 text-[#FFC107]"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"></path></svg>
+                    <span class="text-xs font-bold text-[#FFC107] tracking-widest uppercase">Community Commitment</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight tracking-tight uppercase js-fade-element opacity-0 translate-y-4" style="animation-delay: 0.1s;">
+                    <span class="block">Fire Recovery</span>
+                    <span class="block text-[#FFC107]">& Rebuilding</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl text-stone-300 mb-12 leading-relaxed max-w-3xl mx-auto js-fade-element opacity-0 translate-y-4" style="animation-delay: 0.2s;">
+                    From the ashes, we rise. Our new office and operations in Southern California are dedicated to restoring the land, rebuilding communities, and renewing hope for a brighter future.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 js-fade-element opacity-0 translate-y-4" style="animation-delay: 0.3s;">
+                    <a href="#commitment" class="inline-flex items-center gap-2 bg-[#FFC107] hover:bg-[#FFA000] text-[#1a1a1a] font-bold px-8 py-4 rounded-lg uppercase tracking-widest transition-all duration-300 shadow-lg shadow-[#FFC107]/20">
+                        <span>Our Commitment</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-down" class="lucide lucide-arrow-down w-5 h-5"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+                    </a>
+                    <a href="index.html#contact" class="inline-flex items-center gap-2 bg-transparent border-2 border-white/20 hover:border-[#FFC107] text-white hover:text-[#FFC107] font-bold px-8 py-4 rounded-lg uppercase tracking-widest transition-all duration-300">
+                        <span>Get Involved</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-5 h-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" class="lucide lucide-chevron-down w-6 h-6 text-white/50"><path d="m6 9 6 6 6-6"></path></svg>
+        </div>
+    </section>
+
+    <!-- Our Commitment Section -->
+    <section id="commitment" class="py-24 bg-[#111] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,193,7,0.05),transparent_50%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-full text-xs font-bold text-[#FFC107] tracking-widest uppercase mb-6">Our Mission</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tight">A Promise to Rebuild</h2>
+                <div class="w-24 h-1 bg-[#FFC107] mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-6">
+                    <p class="text-lg text-stone-300 leading-relaxed">
+                        The devastating fires that swept through Altadena left scars on the land and in the hearts of our community. But where others see destruction, we see opportunity—an opportunity to rebuild stronger, smarter, and more resilient than before.
+                    </p>
+                    <p class="text-lg text-stone-300 leading-relaxed">
+                        Dirt Dudes Excavating has opened a dedicated office and operations center in Altadena, CA, with a singular focus: to restore the land, rehabilitate the terrain, and help our neighbors rebuild their homes and their lives.
+                    </p>
+                    <p class="text-lg text-stone-300 leading-relaxed">
+                        This isn't just another project for us. It's a commitment. A promise. A responsibility we take to heart. We've been serving California communities for over 40 years, and now we're bringing that expertise, dedication, and care directly to Altadena.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <div id="office-map" class="w-full h-full"></div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-stone-500 text-xs uppercase tracking-wider mb-1">Southern California Office</p>
+                        <p class="text-stone-400 text-sm">918 E Green St, Altadena, CA 91001</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're Doing Section -->
+    <section class="py-24 bg-[#1a1a1a] relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-full text-xs font-bold text-[#FFC107] tracking-widest uppercase mb-6">Our Services</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tight">Complete Rebuilding Services</h2>
+                <p class="text-xl text-stone-400 max-w-3xl mx-auto mb-4">We bring the full spectrum of our capabilities to Altadena—the same expertise, equipment, and services that have served California for over 40 years, now dedicated to fire recovery and rebuilding.</p>
+                <p class="text-lg text-stone-300 max-w-3xl mx-auto">From initial site preparation through final inspections, we handle every phase of your rebuild project with precision, professionalism, and care.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1: Grading & Land Development -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mountain" class="lucide lucide-mountain w-8 h-8 text-[#FFC107]"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Grading & Pad Development</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        Complete site grading and pad preparation for rebuilding. We handle everything from debris removal to final grade, ensuring your property is ready for construction.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Site clearing and debris removal</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Precise pad grading and compaction</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Erosion control and soil stabilization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Drainage and water management systems</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2: Concrete Services -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layers" class="lucide lucide-layers w-8 h-8 text-[#FFC107]"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Concrete & Foundations</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        Complete concrete services for rebuilding: foundations, slabs, driveways, patios, and decorative finishes. All slab types, stamped, colored, and custom designs.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Foundation footings and grade beams</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>All slab types (monolithic, post-tensioned, suspended)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Stamped, colored, and decorative concrete</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Driveways, walkways, and outdoor spaces</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3: Utility Installation -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plug" class="lucide lucide-plug w-8 h-8 text-[#FFC107]"><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v2a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path><rect x="2" y="8" width="20" height="8" rx="2"></rect></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Utility Installation</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        Complete utility infrastructure installation and restoration. We handle all underground utilities required for rebuilding.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Water and sewer line installation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Electrical and gas utility connections</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Storm drain and drainage systems</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Utility trenching and backfilling</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 4: Project Management -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clipboard-check" class="lucide lucide-clipboard-check w-8 h-8 text-[#FFC107]"><rect x="9" y="2" width="6" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Project Management</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        Comprehensive project management from planning through completion. We coordinate all phases, manage timelines, and ensure seamless execution.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Project planning and scheduling</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Daily progress tracking and updates</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Subcontractor coordination</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Quality control and inspections</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 5: Permitting Services -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check" class="lucide lucide-file-check w-8 h-8 text-[#FFC107]"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Permitting & Compliance</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        We handle all permitting, approvals, and regulatory compliance. Our deep knowledge of local codes and processes streamlines your rebuild.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Building permit applications and processing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Grading and excavation permits</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Utility connection approvals</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Code compliance and inspections</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 6: Site Restoration -->
+                <div class="group bg-[#222] border border-white/5 hover:border-[#FFC107]/30 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-[#FFC107]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FFC107]/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="leaf" class="lucide lucide-leaf w-8 h-8 text-[#FFC107]"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">Land Restoration</h3>
+                    <p class="text-stone-400 leading-relaxed mb-4">
+                        Complete land rehabilitation and restoration services to rebuild the natural foundation of fire-affected properties.
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-300">
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Soil stabilization and remediation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Erosion control and slope stabilization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Vegetation restoration planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span>Final site cleanup and preparation</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery Section -->
+    <section class="py-24 bg-[#1a1a1a] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,193,7,0.03),transparent_50%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-full text-xs font-bold text-[#FFC107] tracking-widest uppercase mb-6">Our Work</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tight">First Project Gallery</h2>
+                <p class="text-xl text-stone-400 max-w-3xl mx-auto">Witness the progress as we restore and rebuild, one project at a time</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Left Image: During Construction -->
+                <div class="gallery-item bg-[#222] border border-white/5 rounded-xl overflow-hidden aspect-square group cursor-pointer hover:border-[#FFC107]/30 transition-all">
+                    <img src="images/388SMarigold_During.jpg" alt="Marigold project during construction" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                
+                <!-- Middle Video: Completed Project -->
+                <div class="gallery-item bg-[#222] border border-white/5 rounded-xl overflow-hidden aspect-square group cursor-pointer hover:border-[#FFC107]/30 transition-all relative">
+                    <video 
+                        src="videos/MarigoldCompleted.MOV" 
+                        autoplay 
+                        loop 
+                        muted 
+                        playsinline
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <!-- Right Image: Back Pad -->
+                <div class="gallery-item bg-[#222] border border-white/5 rounded-xl overflow-hidden aspect-square group cursor-pointer hover:border-[#FFC107]/30 transition-all">
+                    <img src="images/388SMarigold_BackPad.jpg" alt="Marigold project back pad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why It Matters Section -->
+    <section class="py-24 bg-[#111] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,193,7,0.03),transparent_70%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="inline-block px-4 py-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-full text-xs font-bold text-[#FFC107] tracking-widest uppercase mb-6">Why It Matters</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 uppercase tracking-tight">More Than Just Construction</h2>
+                    <p class="text-lg text-stone-300 leading-relaxed">
+                        When disaster strikes, communities need partners who understand that rebuilding isn't just about structures—it's about restoring hope, security, and the foundation of daily life. With over 40 years of experience serving California communities, we bring expertise, empathy, and a commitment to getting it right the first time, every time.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#FFC107]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" class="lucide lucide-award w-6 h-6 text-[#FFC107]"><path d="m15.477 12.89 1.515 8.526a1 1 0 0 1-1.317 1.022L12 20.5 8.325 22.438a1 1 0 0 1-1.317-1.022l1.515-8.526L2.3 9.5a1 1 0 0 1 .129-1.495l8.528-1.515L12.5 1.5a1 1 0 0 1 1.5 0l1.543 7.99 8.528 1.515a1 1 0 0 1 .129 1.495z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 uppercase">40+ Years Experience</h3>
+                                <p class="text-stone-400">Proven track record of excellence in land development and construction across California.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#FFC107]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart-handshake" class="lucide lucide-heart-handshake w-6 h-6 text-[#FFC107]"><path d="M19 14c1.49-1.46 2-3.21 2-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3.51 4.04 2 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 uppercase">Community First</h3>
+                                <p class="text-stone-400">We're not just working in Altadena—we're investing in its future and its people.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-[#FFC107]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" class="lucide lucide-shield-check w-6 h-6 text-[#FFC107]"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 uppercase">Licensed & Insured</h3>
+                                <p class="text-stone-400">Fully licensed, bonded, and insured with comprehensive coverage for your peace of mind.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-24 bg-gradient-to-b from-[#1a1a1a] to-[#111] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,193,7,0.05),transparent_70%)]"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+            <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl p-12 md:p-16 shadow-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" class="lucide lucide-heart w-16 h-16 text-[#FFC107] mx-auto mb-6"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"></path></svg>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight">Together, We Rebuild</h2>
+                <p class="text-xl text-stone-300 mb-8 leading-relaxed">
+                    If you're an Altadena resident affected by the fires, or if you want to learn more about our recovery efforts, we're here to help. Let's rebuild together.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="index.html#contact" class="inline-flex items-center gap-2 bg-[#FFC107] hover:bg-[#FFA000] text-[#1a1a1a] font-bold px-8 py-4 rounded-lg uppercase tracking-widest transition-all duration-300 shadow-lg shadow-[#FFC107]/20">
+                        <span>Contact Our Altadena Office</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-5 h-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
+                    <a href="index.html" class="inline-flex items-center gap-2 bg-transparent border-2 border-white/20 hover:border-[#FFC107] text-white hover:text-[#FFC107] font-bold px-8 py-4 rounded-lg uppercase tracking-widest transition-all duration-300">
+                        <span>Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#111] border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                        <span class="font-bold text-white text-sm uppercase heading-font">Dirt Dudes Excavating</span>
+                    </div>
+                    <p class="text-stone-400 text-sm mb-6 leading-relaxed">Serving California communities for over 40 years with dedication, expertise, and care.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-white transition-colors" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.89 2.89 0 0 1 .88.13V9.4a6.07 6.07 0 0 0-1-.05A6.1 6.1 0 0 0 5 12.28a6.1 6.1 0 0 0 10.86 4.06v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.18z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Services</a></li>
+                        <li><a href="index.html#locations" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Active Sites</a></li>
+                        <li><a href="index.html#contact" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Altadena Office</h4>
+                    <p class="text-stone-400 text-sm mb-2">Dedicated to fire recovery and rebuilding</p>
+                    <p class="text-stone-400 text-sm">918 E Green St</p>
+                    <p class="text-stone-400 text-sm">Altadena, CA 91001</p>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <h4 class="text-white font-bold uppercase text-xs mb-4 tracking-wider">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html#grading" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Grading & Land Development</a></li>
+                        <li><a href="services.html#concrete" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Concrete</a></li>
+                        <li><a href="services.html#utility" class="text-stone-400 hover:text-[#FFC107] text-sm transition-colors">Utility Installation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-500 text-xs">&copy; 2024 Dirt Dudes Excavating INC. All rights reserved.</p>
+                <div class="flex gap-6 text-xs text-stone-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Initialize map and animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize office location map
+            if (typeof L !== 'undefined') {
+                const officeMap = L.map('office-map', {
+                    center: [34.1908, -118.1317], // Altadena coordinates
+                    zoom: 15,
+                    zoomControl: true,
+                    attributionControl: true
+                });
+
+                // Add dark theme tile layer
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                    subdomains: 'abcd',
+                    maxZoom: 19
+                }).addTo(officeMap);
+
+                // Add marker for office location
+                const officeIcon = L.divIcon({
+                    className: 'office-marker',
+                    html: `
+                        <div style="width: 40px; height: 40px; background: #FFC107; border: 4px solid white; border-radius: 50%; box-shadow: 0 0 20px rgba(255,193,7,0.8); display: flex; align-items: center; justify-content: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #1a1a1a;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                    `,
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 40],
+                    popupAnchor: [0, -40]
+                });
+
+                const officeMarker = L.marker([34.1908, -118.1317], { icon: officeIcon }).addTo(officeMap);
+                officeMarker.bindPopup(`
+                    <div style="color: #1a1a1a; text-align: left; padding: 10px; min-width: 180px;">
+                        <div style="font-size: 11px; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
+                            Southern California Office
+                        </div>
+                        <div style="font-size: 13px; line-height: 1.5; color: #1a1a1a; font-weight: 500;">
+                            918 E Green St
+                        </div>
+                        <div style="font-size: 12px; line-height: 1.5; color: #6B7280; margin-top: 2px;">
+                            Altadena, CA 91001
+                        </div>
+                    </div>
+                `, {
+                    maxWidth: 200,
+                    className: 'office-popup',
+                    closeButton: true
+                });
+
+                // Style zoom controls
+                setTimeout(() => {
+                    const zoomControls = officeMap.getContainer().querySelector('.leaflet-control-zoom');
+                    if (zoomControls) {
+                        zoomControls.style.background = 'rgba(26, 26, 26, 0.95)';
+                        zoomControls.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                        zoomControls.style.borderRadius = '8px';
+                        zoomControls.style.backdropFilter = 'blur(8px)';
+                    }
+                    
+                    // Ensure map resizes properly
+                    officeMap.invalidateSize();
+                }, 100);
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    setTimeout(() => {
+                        officeMap.invalidateSize();
+                    }, 100);
+                });
+            }
+
+            // Fade in elements
+            const fadeElements = document.querySelectorAll('.js-fade-element');
+            fadeElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // GSAP Scroll Animations
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animate service cards on scroll
+                gsap.utils.toArray('.group').forEach((card, index) => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.8,
+                        delay: index * 0.1
+                    });
+                });
+
+                // Animate gallery items
+                gsap.utils.toArray('.gallery-item').forEach((item, index) => {
+                    gsap.from(item, {
+                        scrollTrigger: {
+                            trigger: item,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        },
+                        opacity: 0,
+                        scale: 0.9,
+                        duration: 0.6,
+                        delay: index * 0.1
+                    });
+                });
+            }
+
+            // Initialize video autoplay for gallery
+            const galleryVideo = document.querySelector('#project-gallery video');
+            if (galleryVideo) {
+                galleryVideo.play().catch(e => {
+                    console.log('Video autoplay prevented:', e);
+                });
+            }
+        });
+    </script>
+    
+    <style>
+        /* Office map styles */
+        #office-map {
+            background: #1a1a1a;
+        }
+        
+        .office-marker {
+            background: transparent !important;
+            border: none !important;
+        }
+
+        /* Office popup styling */
+        .office-popup .leaflet-popup-content-wrapper {
+            background: white !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+            padding: 0 !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .office-popup .leaflet-popup-content {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .office-popup .leaflet-popup-tip {
+            background: white !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .office-popup .leaflet-popup-close-button {
+            color: #6B7280 !important;
+            font-size: 18px !important;
+            padding: 4px 8px !important;
+        }
+
+        .office-popup .leaflet-popup-close-button:hover {
+            color: #1a1a1a !important;
+        }
+
+        /* Gallery styles */
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</body>
+</html>
+
+ 
