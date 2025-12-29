@@ -639,6 +639,30 @@
     <script src="js/main.js"></script>
     <script src="js/form-handler.js"></script>
     <script src="js/map-interactive.js"></script>
+    
+    <!-- Handle hash navigation from other pages -->
+    <script>
+        // Handle hash navigation when coming from another page
+        if (window.location.hash) {
+            const hash = window.location.hash;
+            // Wait for page to fully load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        const headerOffset = 100;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            });
+        }
+    </script>
 </body>
 </html>
 
