@@ -1,0 +1,111 @@
+{
+  "_README": "Gallery Portfolio Data - Edit this file to update the word grid gallery on the home page. Each item needs: id (unique), displayName (reference code like 'DEV-01' or 'GRE-02'), image (path to image), category (work type), and description (optional). Reference codes: DEV=Development, RES=Residential, COM=Commercial, FOU=Foundation, GRE=Grading, EXC=Excavation, CON=Concrete, INF=Infrastructure. Items are organized by category with sequential numbering.",
+  "items": [
+    {
+      "id": "excavation",
+      "displayName": "EXC-01",
+      "image": "images/hbg-start.jpg",
+      "category": "Excavation",
+      "description": "Precision excavation services"
+    },
+    {
+      "id": "grading",
+      "displayName": "GRE-01",
+      "image": "images/grading-img.jpg",
+      "category": "Grading",
+      "description": "Professional site grading"
+    },
+    {
+      "id": "crownhill",
+      "displayName": "FOU-01",
+      "image": "images/crown-hill-foundation.jpg",
+      "category": "Foundation",
+      "description": "Foundation construction"
+    },
+    {
+      "id": "fines",
+      "displayName": "FOU-02",
+      "image": "images/fines-good-foundation.jpg",
+      "category": "Foundation",
+      "description": "Foundation construction"
+    },
+    {
+      "id": "foundation",
+      "displayName": "FOU-03",
+      "image": "images/fines-good-foundation.jpg",
+      "category": "Foundation",
+      "description": "Expert foundation construction"
+    },
+    {
+      "id": "hbg",
+      "displayName": "CON-01",
+      "image": "images/hbg-pour-good.jpg",
+      "category": "Concrete",
+      "description": "Commercial concrete work"
+    },
+    {
+      "id": "sthelena",
+      "displayName": "CON-02",
+      "image": "images/good-pour-sthelena.jpg",
+      "category": "Concrete",
+      "description": "Commercial concrete pour"
+    },
+    {
+      "id": "concrete",
+      "displayName": "CON-03",
+      "image": "images/hbg-pour-1.jpg",
+      "category": "Concrete",
+      "description": "Professional concrete work"
+    },
+    {
+      "id": "utility",
+      "displayName": "INF-01",
+      "image": "images/utility-sac.jpg",
+      "category": "Infrastructure",
+      "description": "Utility infrastructure work"
+    },
+    {
+      "id": "whitmoore",
+      "displayName": "INF-02",
+      "image": "images/Utility-whitmoore.jpg",
+      "category": "Infrastructure",
+      "description": "Utility installation"
+    },
+    {
+      "id": "marigold",
+      "displayName": "DEV-01",
+      "image": "images/388SMarigold_During.jpg",
+      "category": "Development",
+      "description": "Estate development project"
+    },
+    {
+      "id": "firridge",
+      "displayName": "DEV-02",
+      "image": "images/fir-ridge-start.jpg",
+      "category": "Development",
+      "description": "Residential site development"
+    },
+    {
+      "id": "barry",
+      "displayName": "RES-01",
+      "image": "images/good-forms-barry.jpg",
+      "category": "Residential",
+      "description": "Residential foundation forms"
+    },
+    {
+      "id": "gonzalez",
+      "displayName": "RES-02",
+      "image": "images/good-forms-gonzalez.jpg",
+      "category": "Residential",
+      "description": "Residential construction"
+    },
+    {
+      "id": "orebtella",
+      "displayName": "COM-01",
+      "image": "images/orebtella-forms.jpg",
+      "category": "Commercial",
+      "description": "Commercial development"
+    }
+  ]
+}
+

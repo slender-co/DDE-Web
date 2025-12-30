@@ -421,73 +421,9 @@
         
         <div class="relative min-h-[350px] md:min-h-[380px] flex items-center justify-center py-8">
             <div class="max-w-7xl mx-auto px-6 md:px-12 w-full">
-                <!-- Project words - arranged in grid -->
-                <div class="word-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 relative z-10 justify-items-center">
-                    <!-- Row 1 -->
-                    <div class="project-word word-inactive relative" data-project="marigold" data-image="images/388SMarigold_During.jpg">
-                        <span class="word-text">MARIGOLD</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative" data-project="hbg" data-image="images/hbg-pour-good.jpg">
-                        <span class="word-text">HBG</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative" data-project="firridge" data-image="images/fir-ridge-start.jpg">
-                        <span class="word-text">FIR RIDGE</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative" data-project="crownhill" data-image="images/crown-hill-foundation.jpg">
-                        <span class="word-text">CROWN HILL</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative" data-project="sthelena" data-image="images/good-pour-sthelena.jpg">
-                        <span class="word-text">ST HELENA</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    
-                    <!-- Row 2 -->
-                    <div class="project-word word-inactive relative middle-row" data-project="barry" data-image="images/good-forms-barry.jpg">
-                        <span class="word-text">BARRY</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative middle-row" data-project="gonzalez" data-image="images/good-forms-gonzalez.jpg">
-                        <span class="word-text">GONZALEZ</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative middle-row" data-project="utility" data-image="images/utility-sac.jpg">
-                        <span class="word-text">UTILITY</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative middle-row" data-project="fines" data-image="images/fines-good-foundation.jpg">
-                        <span class="word-text">FINES</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative middle-row" data-project="orebtella" data-image="images/orebtella-forms.jpg">
-                        <span class="word-text">OREBTELLA</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    
-                    <!-- Row 3 -->
-                    <div class="project-word word-inactive relative bottom-row" data-project="whitmoore" data-image="images/Utility-whitmoore.jpg">
-                        <span class="word-text">WHITMOORE</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative bottom-row" data-project="grading" data-image="images/grading-img.jpg">
-                        <span class="word-text">GRADING</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative bottom-row" data-project="foundation" data-image="images/fines-good-foundation.jpg">
-                        <span class="word-text">FOUNDATION</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative bottom-row" data-project="concrete" data-image="images/hbg-pour-1.jpg">
-                        <span class="word-text">CONCRETE</span>
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="project-word word-inactive relative bottom-row" data-project="excavation" data-image="images/hbg-start.jpg">
-                        <span class="word-text">EXCAVATION</span>
-                        <div class="image-preview"></div>
-                    </div>
+                <!-- Project words - dynamically loaded from gallery.json -->
+                <div class="word-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 relative z-10 justify-items-center" id="gallery-grid">
+                    <!-- Gallery items will be loaded here dynamically -->
                 </div>
             </div>
         </div>
@@ -1059,32 +995,80 @@
     
     <!-- Word Grid Gallery Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const projectWords = document.querySelectorAll('.project-word');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const galleryGrid = document.getElementById('gallery-grid');
             const modal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const modalContent = document.querySelector('.image-modal-content');
             
-            // Load images into preview containers
-            projectWords.forEach(word => {
-                const imageSrc = word.getAttribute('data-image');
-                const preview = word.querySelector('.image-preview');
+            // Load gallery data from JSON
+            try {
+                const response = await fetch('data/gallery.json');
+                const data = await response.json();
+                const items = data.items;
                 
-                // Create and load image
-                const img = new Image();
-                img.src = imageSrc;
-                img.alt = word.querySelector('.word-text').textContent + ' Project';
-                preview.appendChild(img);
+                // Calculate row assignments for proper image positioning
+                const desktopItemsPerRow = 5;
+                const totalRows = Math.ceil(items.length / desktopItemsPerRow);
                 
-                // Click word or image to expand in modal
-                word.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    modalImage.src = imageSrc;
-                    modalImage.alt = word.querySelector('.word-text').textContent + ' Project';
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                // Generate gallery items
+                items.forEach((item, index) => {
+                    const row = Math.floor(index / desktopItemsPerRow) + 1;
+                    const isLastRow = row === totalRows;
+                    const isMiddleRow = row === Math.ceil(totalRows / 2) && totalRows > 2;
+                    
+                    // Determine row class
+                    let rowClass = '';
+                    if (isLastRow) {
+                        rowClass = 'bottom-row';
+                    } else if (isMiddleRow) {
+                        rowClass = 'middle-row';
+                    }
+                    
+                    const wordDiv = document.createElement('div');
+                    wordDiv.className = `project-word word-inactive relative ${rowClass}`;
+                    wordDiv.setAttribute('data-project', item.id);
+                    wordDiv.setAttribute('data-image', item.image);
+                    
+                    wordDiv.innerHTML = `
+                        <span class="word-text">${item.displayName.toUpperCase()}</span>
+                        <div class="image-preview"></div>
+                    `;
+                    
+                    galleryGrid.appendChild(wordDiv);
                 });
-            });
+                
+                // Initialize gallery functionality after items are loaded
+                initializeGallery();
+            } catch (error) {
+                console.error('Error loading gallery data:', error);
+                galleryGrid.innerHTML = '<p class="text-stone-600">Gallery loading...</p>';
+            }
+            
+            function initializeGallery() {
+                const projectWords = document.querySelectorAll('.project-word');
+                
+                // Load images into preview containers
+                projectWords.forEach(word => {
+                    const imageSrc = word.getAttribute('data-image');
+                    const preview = word.querySelector('.image-preview');
+                    
+                    // Create and load image
+                    const img = new Image();
+                    img.src = imageSrc;
+                    img.alt = word.querySelector('.word-text').textContent + ' Project';
+                    preview.appendChild(img);
+                    
+                    // Click word or image to expand in modal
+                    word.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        modalImage.src = imageSrc;
+                        modalImage.alt = word.querySelector('.word-text').textContent + ' Project';
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+            }
             
             // Close modal function
             const closeModalFunc = () => {

@@ -78,6 +78,16 @@ To find coordinates for an address:
 - **Final Phase**: Green (#10B981)
 - **Completed**: Gray (#6B7280)
 
+### Get Directions Feature
+
+Each project automatically includes a "Get Directions" button that:
+- Opens Google Maps on desktop/Android devices
+- Opens Apple Maps on iOS devices
+- Uses the project's coordinates for accurate navigation
+- Works from both the map popup and the project list sidebar
+
+**Note**: Make sure each project has both an `address` and `coordinates` (lat/lng) for the directions feature to work properly.
+
 ### Quick Tips
 
 - **Save frequently** - Changes take effect immediately after saving
@@ -86,6 +96,7 @@ To find coordinates for an address:
 - **Backup before major changes** - Copy the file before making big edits
 - **One project per object** - Each project is a separate object in the array
 - **Keep the structure** - Always maintain the `projects` array format
+- **Include addresses** - Always include both `address` and `coordinates` for directions to work
 
 ### Common Issues
 

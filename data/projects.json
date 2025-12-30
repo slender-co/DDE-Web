@@ -1,4 +1,5 @@
 {
+  "_README": "To add or edit projects, simply modify the 'projects' array below. Each project needs: id (unique), name, projectId, status, address, coordinates (lat/lng), jobSize, workType, type, category, features (array), description, startDate, and estimatedCompletion. The file is automatically loaded by the website.",
   "projects": [
     {
       "id": "napa",

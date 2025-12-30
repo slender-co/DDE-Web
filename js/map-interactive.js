@@ -209,14 +209,15 @@ function createMarker(project) {
     marker.bindPopup(popupContent, {
         className: 'project-popup',
         maxWidth: 320,
-        closeButton: true
+        maxHeight: 600,
+        closeButton: true,
+        autoPan: true
     });
+
 
     // Add click handler
     marker.on('click', () => {
         selectProject(project.id);
-        // Open popup
-        marker.openPopup();
     });
 
     return marker;
@@ -307,6 +308,7 @@ function selectProject(projectId) {
     if (marker) {
         map.setView([project.coordinates.lat, project.coordinates.lng], 12);
         marker.openPopup();
+        // Button will be added via popupopen event
     }
 }
 
@@ -426,7 +428,7 @@ function renderFilteredProjectList(projects) {
                 ${project.category ? `<span class="px-2 py-1 rounded text-[10px] bg-[#FFC107]/10 text-[#FFC107] border border-[#FFC107]/20 uppercase font-bold">${project.category}</span>` : ''}
                 <span class="px-2 py-1 rounded text-[10px] uppercase font-bold border" style="color: ${statusColor}; border-color: ${statusColor}; background: ${statusColor}20;">${project.status}</span>
             </div>
-            <div class="pt-3 border-t border-white/5 space-y-2">
+            <div class="pt-3 border-t border-white/5 space-y-2 mb-3">
                 <div class="flex justify-between items-center">
                     <span class="text-stone-500 uppercase font-bold text-[10px]">Scale</span>
                     <span class="text-white font-bold text-xs">${project.jobSize || 'Not Specified'}</span>
@@ -436,11 +438,31 @@ function renderFilteredProjectList(projects) {
                     <span class="text-white font-bold text-xs">${project.workType || 'General'}</span>
                 </div>
             </div>
+            <button class="directions-btn-list w-full mt-2" data-project-id="${project.id}" aria-label="Get Directions">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Get Directions</span>
+            </button>
         `;
 
         item.addEventListener('click', () => {
             selectProject(project.id);
         });
+        
+        // Add directions button handler
+        const directionsBtn = item.querySelector('.directions-btn-list');
+        if (directionsBtn) {
+            directionsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.openDirections(
+                    project.address || `${project.coordinates.lat},${project.coordinates.lng}`,
+                    project.coordinates.lat,
+                    project.coordinates.lng
+                );
+            });
+        }
 
         projectList.appendChild(item);
     });
@@ -590,3 +612,28 @@ function renderSummaryCards() {
         summaryGrid.appendChild(card);
     });
 }
+
+/**
+ * Open directions in navigation app
+ * Supports Google Maps, Apple Maps, and Waze
+ * Made globally accessible for onclick handlers
+ */
+window.openDirections = function(address, lat, lng) {
+    // Detect if user is on iOS (for Apple Maps preference)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    
+    // Create navigation URLs
+    // Use coordinates for more accurate navigation
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    const appleMapsUrl = `http://maps.apple.com/?daddr=${lat},${lng}`;
+    const wazeUrl = `https://www.waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+    
+    // Try to open native app, fallback to web
+    if (isIOS) {
+        // On iOS, try Apple Maps first
+        window.open(appleMapsUrl, '_blank');
+    } else {
+        // On other platforms, use Google Maps
+        window.open(googleMapsUrl, '_blank');
+    }
+};
