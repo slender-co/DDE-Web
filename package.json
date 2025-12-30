@@ -1,7 +1,7 @@
 {
-  "name": "vine-build-construction",
+  "name": "dirt-dudes-excavating",
   "version": "1.0.0",
-  "description": "Website for Vine & Build Construction - Premier estate construction firm",
+  "description": "Website for Dirt Dudes Excavating - Professional excavation and site development services",
   "main": "index.html",
   "scripts": {
     "start": "http-server -p 8000 -o",
@@ -9,12 +9,13 @@
     "serve": "python -m http.server 8000"
   },
   "keywords": [
+    "excavation",
     "construction",
-    "website",
-    "estate",
-    "vineyard"
+    "grading",
+    "concrete",
+    "site-development"
   ],
-  "author": "Vine & Build Construction",
+  "author": "Dirt Dudes Excavating INC.",
   "license": "UNLICENSED",
   "devDependencies": {},
   "dependencies": {}

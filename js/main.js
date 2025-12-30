@@ -1,5 +1,5 @@
 /**
- * Main JavaScript for Vine & Build Construction
+ * Main JavaScript for Dirt Dudes Excavating
  * Handles animations, navigation, and interactive elements
  */
 

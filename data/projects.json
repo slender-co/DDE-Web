@@ -17,17 +17,17 @@
       "category": "Commercial",
       "features": [
         "Custom Foundation Design",
-        "Sustainable Materials",
-        "Vineyard Integration",
-        "Estate Planning"
+        "Site Grading",
+        "Utility Installation",
+        "Concrete Work"
       ],
-      "description": "Large-scale estate construction with integrated vineyard infrastructure and sustainable building practices.",
+      "description": "Large-scale site development with comprehensive excavation, grading, and foundation work.",
       "startDate": "2024-03-15",
       "estimatedCompletion": "2024-11-30"
     },
     {
       "id": "sonoma",
-      "name": "Sonoma Vineyard",
+      "name": "Sonoma Commercial Site",
       "projectId": "#SV-2024-12",
       "status": "In Progress",
       "address": "5678 Sonoma Highway, Sonoma, CA 95476",
@@ -38,15 +38,15 @@
       },
       "jobSize": "Medium Scale",
       "workType": "Land Development",
-      "type": "Agricultural",
+      "type": "Commercial",
       "category": "Infrastructure",
       "features": [
-        "Irrigation Systems",
+        "Site Grading",
         "Land Development",
         "Access Roads",
         "Drainage Solutions"
       ],
-      "description": "Comprehensive vineyard development including land preparation, irrigation, and infrastructure.",
+      "description": "Comprehensive site development including land preparation, grading, and infrastructure installation.",
       "startDate": "2024-05-01",
       "estimatedCompletion": "2025-02-15"
     },

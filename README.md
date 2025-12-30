@@ -1,6 +1,6 @@
-# Vine & Build Construction Website
+# Dirt Dudes Excavating Website
 
-A modern, responsive website for Vine & Build Construction - a premier estate construction firm specializing in custom builds, vineyard construction, and sustainable development.
+A modern, responsive website for Dirt Dudes Excavating - a professional excavation and site development company with over 40 years of experience in grading, concrete, utility installation, and comprehensive site work.
 
 ## 🚀 Quick Start
 
@@ -65,7 +65,7 @@ DDE_Web/
 The website uses a carefully crafted design system with the following key elements:
 
 ### Color Palette
-- **Primary (Rust)**: `#D35F35` - Main brand color
+- **Primary (Yellow)**: `#FFC107` - Main brand color
 - **Dark**: `#1a1a1a` - Headers, buttons, dark sections
 - **Cream**: `#F4F1EA` - Main light background
 - **Stone Grays**: Various shades for text and borders
@@ -151,13 +151,13 @@ Update the CSS variables in `styles/theme.css`:
 
 ## 📄 License
 
-This project is proprietary and belongs to Vine & Build Construction LLC.
+This project is proprietary and belongs to Dirt Dudes Excavating INC.
 
 ## 🤝 Support
 
-For questions or issues, contact: projects@vinebuild.com
+For questions or issues, contact: info@dirtdudesexcavating.com
 
 ---
 
-**Built with care for Vine & Build Construction** 🏗️
+**Built with care for Dirt Dudes Excavating** 🏗️
 
