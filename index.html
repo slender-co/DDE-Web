@@ -36,7 +36,9 @@
     <header class="fixed top-0 left-0 right-0 z-50 w-full p-4 md:p-6 transition-all duration-300" id="header">
         <div class="max-w-[1920px] mx-auto bg-white/90 backdrop-blur-md border border-stone-200/50 rounded-xl px-6 py-4 flex justify-between items-center shadow-lg shadow-stone-900/5">
             <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                <div class="bg-white rounded-lg p-1.5 flex items-center justify-center">
+                    <img src="images/DirtDudes_Usable_Logo.png" alt="Dirt Dudes Excavating Logo" class="h-10 w-auto object-contain">
+                </div>
                 <div class="flex flex-col leading-none">
                     <span class="font-bold tracking-tight text-lg text-stone-900 heading-font uppercase">Dirt Dudes Excavating INC.
                     </span>
@@ -408,8 +410,98 @@
         </div>
     </section>
 
+    <!-- Word Grid Gallery -->
+    <section id="word-gallery" class="pt-12 pb-4 bg-[#F4F1EA] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-6">
+                <span class="text-[#FFC107] font-bold uppercase tracking-widest text-xs mb-2 block">Our Projects</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#1a1a1a] uppercase mb-2">Project Portfolio</h2>
+            </div>
+        </div>
+        
+        <div class="relative min-h-[350px] md:min-h-[380px] flex items-center justify-center py-8">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 w-full">
+                <!-- Project words - arranged in grid -->
+                <div class="word-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 relative z-10 justify-items-center">
+                    <!-- Row 1 -->
+                    <div class="project-word word-inactive relative" data-project="marigold" data-image="images/388SMarigold_During.jpg">
+                        <span class="word-text">MARIGOLD</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative" data-project="hbg" data-image="images/hbg-pour-good.jpg">
+                        <span class="word-text">HBG</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative" data-project="firridge" data-image="images/fir-ridge-start.jpg">
+                        <span class="word-text">FIR RIDGE</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative" data-project="crownhill" data-image="images/crown-hill-foundation.jpg">
+                        <span class="word-text">CROWN HILL</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative" data-project="sthelena" data-image="images/good-pour-sthelena.jpg">
+                        <span class="word-text">ST HELENA</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="project-word word-inactive relative middle-row" data-project="barry" data-image="images/good-forms-barry.jpg">
+                        <span class="word-text">BARRY</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative middle-row" data-project="gonzalez" data-image="images/good-forms-gonzalez.jpg">
+                        <span class="word-text">GONZALEZ</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative middle-row" data-project="utility" data-image="images/utility-sac.jpg">
+                        <span class="word-text">UTILITY</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative middle-row" data-project="fines" data-image="images/fines-good-foundation.jpg">
+                        <span class="word-text">FINES</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative middle-row" data-project="orebtella" data-image="images/orebtella-forms.jpg">
+                        <span class="word-text">OREBTELLA</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="project-word word-inactive relative bottom-row" data-project="whitmoore" data-image="images/Utility-whitmoore.jpg">
+                        <span class="word-text">WHITMOORE</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative bottom-row" data-project="grading" data-image="images/grading-img.jpg">
+                        <span class="word-text">GRADING</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative bottom-row" data-project="foundation" data-image="images/fines-good-foundation.jpg">
+                        <span class="word-text">FOUNDATION</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative bottom-row" data-project="concrete" data-image="images/hbg-pour-1.jpg">
+                        <span class="word-text">CONCRETE</span>
+                        <div class="image-preview"></div>
+                    </div>
+                    <div class="project-word word-inactive relative bottom-row" data-project="excavation" data-image="images/hbg-start.jpg">
+                        <span class="word-text">EXCAVATION</span>
+                        <div class="image-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Expanded Image Modal - Outside section for proper viewport positioning -->
+    <div class="image-modal" id="image-modal">
+        <div class="image-modal-content">
+            <img id="modal-image" src="" alt="Expanded project image">
+        </div>
+    </div>
+
     <!-- Interactive Project Map -->
-    <section id="locations" class="py-24 bg-[#111]">
+    <section id="locations" class="pt-8 pb-24 bg-[#111]">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
                 <div>
@@ -635,10 +727,391 @@
         </div>
     </footer>
 
+    <!-- Word Grid Gallery Styles -->
+    <style>
+        .project-word {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+        
+        .word-grid {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .word-text {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.75rem);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            line-height: 1.1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .word-inactive .word-text {
+            color: rgba(26, 26, 26, 0.2);
+        }
+        
+        .project-word:hover .word-text {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+        
+        /* Image Preview */
+        .image-preview {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px) scale(0.95);
+            z-index: 50;
+            top: 100%;
+            left: 50%;
+            margin-left: -120px;
+            margin-top: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 3px solid white;
+        }
+        
+        /* Top row - show images below */
+        .project-word:not(.bottom-row):not(.middle-row) .image-preview {
+            top: 100%;
+            bottom: auto;
+        }
+        
+        /* Middle row shows images above */
+        .middle-row .image-preview {
+            top: auto;
+            bottom: 100%;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            transform: translateY(-10px) scale(0.95);
+        }
+        
+        .middle-row:hover .image-preview {
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Bottom row shows images above */
+        .bottom-row .image-preview {
+            top: auto;
+            bottom: 100%;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            transform: translateY(-10px) scale(0.95);
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+        
+        /* Show preview on hover */
+        .project-word:hover .image-preview {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        
+        .bottom-row:hover .image-preview {
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Expanded image modal */
+        /* Expanded image modal - fixed to viewport, outside section */
+        .image-modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .image-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .image-modal-content {
+            max-width: 80vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            position: relative;
+            margin: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-modal.active .image-modal-content {
+            transform: scale(1);
+        }
+        
+        .image-modal img {
+            max-width: 80vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+        
+        /* Position adjustments for edge words - keep within bounds */
+        .project-word:nth-child(5n) .image-preview,
+        .project-word:nth-child(5n-1) .image-preview {
+            left: auto;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .project-word:nth-child(5n-4) .image-preview,
+        .project-word:nth-child(5n-3) .image-preview {
+            left: 0;
+            margin-left: 0;
+        }
+        
+        /* Middle row edge positioning */
+        .middle-row:nth-child(5n) .image-preview,
+        .middle-row:nth-child(5n-1) .image-preview {
+            left: auto;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .middle-row:nth-child(5n-4) .image-preview,
+        .middle-row:nth-child(5n-3) .image-preview {
+            left: 0;
+            margin-left: 0;
+        }
+        
+        /* Bottom row edge positioning */
+        .bottom-row:nth-child(5n) .image-preview,
+        .bottom-row:nth-child(5n-1) .image-preview {
+            left: auto;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .bottom-row:nth-child(5n-4) .image-preview,
+        .bottom-row:nth-child(5n-3) .image-preview {
+            left: 0;
+            margin-left: 0;
+        }
+        
+        /* Ensure images stay within section bounds */
+        #word-gallery {
+            overflow: visible;
+        }
+        
+        .word-grid {
+            position: relative;
+        }
+        
+        @media (max-width: 1024px) {
+            .image-preview {
+                width: 200px;
+                height: 200px;
+                margin-left: -100px;
+            }
+            
+            .project-word:nth-child(4n) .image-preview,
+            .project-word:nth-child(4n-1) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .project-word:nth-child(4n-3) .image-preview,
+            .project-word:nth-child(4n-2) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+            
+            /* Middle row on tablet */
+            .middle-row:nth-child(4n) .image-preview,
+            .middle-row:nth-child(4n-1) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .middle-row:nth-child(4n-3) .image-preview,
+            .middle-row:nth-child(4n-2) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+            
+            /* Bottom row on tablet */
+            .bottom-row:nth-child(4n) .image-preview,
+            .bottom-row:nth-child(4n-1) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .bottom-row:nth-child(4n-3) .image-preview,
+            .bottom-row:nth-child(4n-2) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .word-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
+            }
+            
+            .word-text {
+                font-size: clamp(0.875rem, 4vw, 1.25rem);
+            }
+            
+            .image-preview {
+                width: 180px;
+                height: 180px;
+                margin-left: -90px;
+            }
+            
+            .project-word:nth-child(2n) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .project-word:nth-child(2n-1) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+            
+            /* Middle row on mobile */
+            .middle-row:nth-child(2n) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .middle-row:nth-child(2n-1) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+            
+            /* Bottom row on mobile */
+            .bottom-row:nth-child(2n) .image-preview {
+                left: auto;
+                right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .bottom-row:nth-child(2n-1) .image-preview {
+                left: 0;
+                margin-left: 0;
+            }
+        }
+    </style>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/form-handler.js"></script>
     <script src="js/map-interactive.js"></script>
+    
+    <!-- Word Grid Gallery Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectWords = document.querySelectorAll('.project-word');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalContent = document.querySelector('.image-modal-content');
+            
+            // Load images into preview containers
+            projectWords.forEach(word => {
+                const imageSrc = word.getAttribute('data-image');
+                const preview = word.querySelector('.image-preview');
+                
+                // Create and load image
+                const img = new Image();
+                img.src = imageSrc;
+                img.alt = word.querySelector('.word-text').textContent + ' Project';
+                preview.appendChild(img);
+                
+                // Click word or image to expand in modal
+                word.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    modalImage.src = imageSrc;
+                    modalImage.alt = word.querySelector('.word-text').textContent + ' Project';
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal function
+            const closeModalFunc = () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+            
+            // Close on clicking anywhere (background or image)
+            modal.addEventListener('click', (e) => {
+                closeModalFunc();
+            });
+            
+            // Prevent closing when clicking directly on the image content
+            if (modalContent) {
+                modalContent.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+            
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModalFunc();
+                }
+            });
+        });
+    </script>
     
     <!-- Handle hash navigation from other pages -->
     <script>
