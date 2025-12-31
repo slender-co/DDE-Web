@@ -12,6 +12,10 @@ let projectsData = [];
 document.addEventListener('DOMContentLoaded', () => {
     initializeViewToggle();
     loadProjectsData();
+    // Initialize navigation after a short delay to ensure DOM is ready
+    setTimeout(() => {
+        initializeProjectNavigation();
+    }, 500);
 });
 
 /**
@@ -466,6 +470,11 @@ function renderFilteredProjectList(projects) {
 
         projectList.appendChild(item);
     });
+    
+    // Update navigation arrows after rendering
+    if (window.updateProjectNavigationArrows) {
+        window.updateProjectNavigationArrows();
+    }
 }
 
 /**
@@ -611,6 +620,194 @@ function renderSummaryCards() {
 
         summaryGrid.appendChild(card);
     });
+    
+    // Update navigation arrows after rendering
+    if (window.updateProjectNavigationArrows) {
+        window.updateProjectNavigationArrows();
+    }
+}
+
+/**
+ * Initialize project navigation arrows
+ */
+function initializeProjectNavigation() {
+    const projectList = document.getElementById('project-list');
+    const summaryGrid = document.getElementById('summary-grid');
+    const prevProjectBtn = document.getElementById('prev-project-btn');
+    const nextProjectBtn = document.getElementById('next-project-btn');
+    const prevSummaryBtn = document.getElementById('prev-summary-btn');
+    const nextSummaryBtn = document.getElementById('next-summary-btn');
+    
+    // Function to jump to next/previous project (actually selects it)
+    function jumpToProject(direction) {
+        const items = projectList.querySelectorAll('.project-list-item');
+        if (items.length === 0) return;
+        
+        // Find currently active/selected project
+        let currentIndex = -1;
+        items.forEach((item, index) => {
+            if (item.classList.contains('active')) {
+                currentIndex = index;
+            }
+        });
+        
+        // If no active project, use first visible one
+        if (currentIndex === -1) {
+            const containerRect = projectList.getBoundingClientRect();
+            for (let i = 0; i < items.length; i++) {
+                const itemRect = items[i].getBoundingClientRect();
+                if (itemRect.top >= containerRect.top && itemRect.bottom <= containerRect.bottom) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+            if (currentIndex === -1) currentIndex = 0;
+        }
+        
+        // Calculate next/previous index
+        let targetIndex;
+        if (direction === 'next') {
+            targetIndex = (currentIndex + 1) % items.length;
+        } else {
+            targetIndex = (currentIndex - 1 + items.length) % items.length;
+        }
+        
+        // Select the target project
+        const targetItem = items[targetIndex];
+        const projectId = targetItem.dataset.projectId;
+        if (projectId) {
+            selectProject(projectId);
+            targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+    
+    // Function to jump to next/previous card in summary
+    function jumpToSummaryCard(direction) {
+        const cards = summaryGrid.querySelectorAll('[data-project-id]');
+        if (cards.length === 0) return;
+        
+        // Find currently visible card
+        const container = summaryGrid.closest('.overflow-y-auto');
+        if (!container) return;
+        
+        const containerRect = container.getBoundingClientRect();
+        let currentIndex = -1;
+        
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            if (cardRect.top >= containerRect.top && cardRect.bottom <= containerRect.bottom) {
+                currentIndex = index;
+            }
+        });
+        
+        if (currentIndex === -1) currentIndex = 0;
+        
+        // Calculate next/previous index
+        let targetIndex;
+        if (direction === 'next') {
+            targetIndex = (currentIndex + 1) % cards.length;
+        } else {
+            targetIndex = (currentIndex - 1 + cards.length) % cards.length;
+        }
+        
+        // Scroll to and select the target card
+        const targetCard = cards[targetIndex];
+        const projectId = targetCard.dataset.projectId;
+        if (projectId) {
+            showProjectIndex();
+            setTimeout(() => {
+                selectProject(projectId);
+            }, 100);
+        }
+    }
+    
+    // Update arrow visibility based on scroll position
+    function updateArrowVisibility(container, prevBtn, nextBtn) {
+        if (!container || !prevBtn || !nextBtn) return;
+        
+        const hasScroll = container.scrollHeight > container.clientHeight;
+        const isAtTop = container.scrollTop <= 10;
+        const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 10;
+        
+        if (hasScroll) {
+            prevBtn.style.opacity = isAtTop ? '0' : '1';
+            prevBtn.style.pointerEvents = isAtTop ? 'none' : 'auto';
+            nextBtn.style.opacity = isAtBottom ? '0' : '1';
+            nextBtn.style.pointerEvents = isAtBottom ? 'none' : 'auto';
+        } else {
+            prevBtn.style.opacity = '0';
+            prevBtn.style.pointerEvents = 'none';
+            nextBtn.style.opacity = '0';
+            nextBtn.style.pointerEvents = 'none';
+        }
+    }
+    
+    // Set up event listeners for project list
+    if (projectList && prevProjectBtn && nextProjectBtn) {
+        prevProjectBtn.addEventListener('click', () => jumpToProject('prev'));
+        nextProjectBtn.addEventListener('click', () => jumpToProject('next'));
+        projectList.addEventListener('scroll', () => updateArrowVisibility(projectList, prevProjectBtn, nextProjectBtn));
+        // Always show arrows if there are multiple projects
+        const items = projectList.querySelectorAll('.project-list-item');
+        if (items.length > 1) {
+            prevProjectBtn.style.opacity = '1';
+            prevProjectBtn.style.pointerEvents = 'auto';
+            nextProjectBtn.style.opacity = '1';
+            nextProjectBtn.style.pointerEvents = 'auto';
+        }
+    }
+    
+    // Set up event listeners for summary view
+    if (summaryGrid && prevSummaryBtn && nextSummaryBtn) {
+        const summaryContainer = summaryGrid.closest('.overflow-y-auto');
+        prevSummaryBtn.addEventListener('click', () => jumpToSummaryCard('prev'));
+        nextSummaryBtn.addEventListener('click', () => jumpToSummaryCard('next'));
+        if (summaryContainer) {
+            summaryContainer.addEventListener('scroll', () => updateArrowVisibility(summaryContainer, prevSummaryBtn, nextSummaryBtn));
+            // Always show arrows if there are multiple cards
+            const cards = summaryGrid.querySelectorAll('[data-project-id]');
+            if (cards.length > 1) {
+                prevSummaryBtn.style.opacity = '1';
+                prevSummaryBtn.style.pointerEvents = 'auto';
+                nextSummaryBtn.style.opacity = '1';
+                nextSummaryBtn.style.pointerEvents = 'auto';
+            }
+        }
+    }
+    
+    // Store update function for use after rendering
+    window.updateProjectNavigationArrows = function() {
+        setTimeout(() => {
+            if (projectList && prevProjectBtn && nextProjectBtn) {
+                const items = projectList.querySelectorAll('.project-list-item');
+                if (items.length > 1) {
+                    prevProjectBtn.style.opacity = '1';
+                    prevProjectBtn.style.pointerEvents = 'auto';
+                    nextProjectBtn.style.opacity = '1';
+                    nextProjectBtn.style.pointerEvents = 'auto';
+                } else {
+                    prevProjectBtn.style.opacity = '0';
+                    prevProjectBtn.style.pointerEvents = 'none';
+                    nextProjectBtn.style.opacity = '0';
+                    nextProjectBtn.style.pointerEvents = 'none';
+                }
+            }
+            if (summaryGrid && prevSummaryBtn && nextSummaryBtn) {
+                const cards = summaryGrid.querySelectorAll('[data-project-id]');
+                if (cards.length > 1) {
+                    prevSummaryBtn.style.opacity = '1';
+                    prevSummaryBtn.style.pointerEvents = 'auto';
+                    nextSummaryBtn.style.opacity = '1';
+                    nextSummaryBtn.style.pointerEvents = 'auto';
+                } else {
+                    prevSummaryBtn.style.opacity = '0';
+                    prevSummaryBtn.style.pointerEvents = 'none';
+                    nextSummaryBtn.style.opacity = '0';
+                    nextSummaryBtn.style.pointerEvents = 'none';
+                }
+            }
+        }, 100);
+    };
 }
 
 /**

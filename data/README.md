@@ -39,12 +39,24 @@ Each project requires the following fields:
 
 ### Adding a New Project
 
+**Easiest Method: Copy & Paste**
+
 1. Open `projects.json`
-2. Add a new object to the `projects` array
-3. Use a unique `id` (lowercase, no spaces)
-4. Set the `position.top` and `position.left` to place the marker on the map
-5. Save the file
-6. Refresh the browser
+2. **Copy an existing project** (the entire object from `{` to `},`)
+3. **Paste it** after the last project (before the closing `]`)
+4. **Update these key fields:**
+   - `id` - Make it unique (lowercase, no spaces, e.g., "new-project")
+   - `name` - Project display name
+   - `projectId` - Your project reference number (e.g., "#PROJ-2024-01")
+   - `address` - Full street address
+   - `coordinates.lat` and `coordinates.lng` - Get from Google Maps (right-click location)
+   - `status` - "Active", "In Progress", "Final Phase", or "Completed"
+   - `features` - Array of project highlights
+5. **Add a comma** after the previous project if needed
+6. Save the file
+7. Refresh the browser
+
+**Quick Tip:** The easiest way is to copy the entire project object (including the comma), paste it, then just change the values you need!
 
 ### Editing an Existing Project
 

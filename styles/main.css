@@ -619,3 +619,30 @@ main .text-stone-600 {
     flex-shrink: 0;
 }
 
+/* Project Navigation Arrows */
+#prev-project-btn,
+#next-project-btn,
+#prev-summary-btn,
+#next-summary-btn {
+    transition: opacity 0.3s ease, transform 0.2s ease, background 0.2s ease;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prev-project-btn:hover,
+#next-project-btn:hover,
+#prev-summary-btn:hover,
+#next-summary-btn:hover {
+    transform: scale(1.15);
+    background: #FFC107 !important;
+}
+
+/* Ensure scrollable containers work properly */
+#project-list,
+#summary-view .overflow-y-auto {
+    scroll-behavior: smooth;
+}
+

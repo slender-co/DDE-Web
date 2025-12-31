@@ -1,80 +1,81 @@
 {
   "_README": "To add or edit projects, simply modify the 'projects' array below. Each project needs: id (unique), name, projectId, status, address, coordinates (lat/lng), jobSize, workType, type, category, features (array), description, startDate, and estimatedCompletion. The file is automatically loaded by the website.",
+  "_TEMPLATE": "Copy this template to add a new project (remove the _TEMPLATE key before using): {\"id\": \"unique-id\", \"name\": \"Project Name\", \"projectId\": \"#PROJ-2024-01\", \"status\": \"Active\", \"address\": \"123 Main St, City, CA 12345\", \"coordinates\": {\"lat\": 38.2975, \"lng\": -122.2869, \"display\": \"38.2975° N, 122.2869° W\"}, \"jobSize\": \"Large Scale\", \"workType\": \"Estate Development\", \"type\": \"Structural\", \"category\": \"Commercial\", \"features\": [\"Feature 1\", \"Feature 2\"], \"description\": \"Project description here.\", \"startDate\": \"2024-01-01\", \"estimatedCompletion\": \"2024-12-31\"}",
   "projects": [
     {
-      "id": "napa",
-      "name": "Napa Valley Estate",
-      "projectId": "#NV-2024-08",
-      "status": "Active",
-      "address": "1234 Silverado Trail, Napa, CA 94558",
+      "id": "HBG",
+      "name": "3 Healdsburg",
+      "projectId": "#HBG-2023",
+      "status": "Final Phase",
+      "address": "3 Healdsburg Avenue, Healdsburg, CA 95448",
       "coordinates": {
-        "lat": 38.2975,
-        "lng": -122.2869,
+        "lat": 38.605198,
+        "lng": -122.868629,
         "display": "38.2975° N, 122.2869° W"
       },
       "jobSize": "Large Scale",
-      "workType": "Estate Development",
+      "workType": "Multi-Family Development",
       "type": "Structural",
       "category": "Commercial",
       "features": [
-        "Custom Foundation Design",
-        "Site Grading",
-        "Utility Installation",
-        "Concrete Work"
+        "Foundation / Slab Work",
+        "Site Grading / Pad Development",
+        "Wet & DryUtility Installation",
+        "Curb & Gutter / Street & Site Work"
       ],
-      "description": "Large-scale site development with comprehensive excavation, grading, and foundation work.",
-      "startDate": "2024-03-15",
-      "estimatedCompletion": "2024-11-30"
+      "description": "Large-scale site development with pad development, utility installation, and concrete/foundation work.",
+      "startDate": "2023-10",
+      "estimatedCompletion": "2026"
     },
-    {
-      "id": "sonoma",
-      "name": "Sonoma Commercial Site",
-      "projectId": "#SV-2024-12",
-      "status": "In Progress",
-      "address": "5678 Sonoma Highway, Sonoma, CA 95476",
-      "coordinates": {
-        "lat": 38.2919,
-        "lng": -122.4580,
-        "display": "38.2919° N, 122.4580° W"
-      },
-      "jobSize": "Medium Scale",
-      "workType": "Land Development",
-      "type": "Commercial",
-      "category": "Infrastructure",
+      {
+        "id": "Hummingbird",
+        "name": "Hembree Lane Oaks",
+        "projectId": "#HL-2024",
+        "status": "Active",
+        "address": "7842 Hembree Lane, Windsor, CA 95492",
+        "coordinates": {
+          "lat": 38.5361047,
+          "lng": -122.7978838,
+          "display": "38.5361047° N, 122.7978838° W"
+        },
+        "jobSize": "Large Scale",
+        "workType": "Residential Subdivision",
+        "type": "Structural",
+        "category": "Commercial",
       "features": [
-        "Site Grading",
-        "Land Development",
+        "Concrete & Site Work / Foundations",
+        "Land Clearing / Development",
         "Access Roads",
         "Drainage Solutions"
       ],
       "description": "Comprehensive site development including land preparation, grading, and infrastructure installation.",
-      "startDate": "2024-05-01",
-      "estimatedCompletion": "2025-02-15"
+      "startDate": "2024",
+      "estimatedCompletion": "2026"
     },
     {
-      "id": "santa-barbara",
-      "name": "Santa Barbara Modern",
-      "projectId": "#SB-2023-99",
-      "status": "Final Phase",
-      "address": "9012 State Street, Santa Barbara, CA 93101",
+      "id": "Marigold",
+      "name": "Single Family Residence",
+      "projectId": "#SFM-2025",
+      "status": "In-Progress",
+      "address": "388 S Marigold Ave, Altadena, CA 91001",
       "coordinates": {
-        "lat": 34.4208,
-        "lng": -119.6982,
-        "display": "34.4208° N, 119.6982° W"
+        "lat": 34.194580078125,
+        "lng": -118.136878967285166982,
+        "display": "34.194580078125° N, 118.136878967285166982° W"
       },
-      "jobSize": "Large Scale",
+      "jobSize": "Small Scale",
       "workType": "Residential Construction",
       "type": "Residential",
       "category": "Residential",
       "features": [
-        "Modern Architecture",
-        "Energy Efficient",
-        "Smart Home Integration",
-        "Landscape Design"
+        "Pad Development / Site Work",
+        "Foundation / Curb & Gutter",
+        "Wet & Dry Utility Installation",
+        "Security Camera & Fence Installation"
       ],
-      "description": "Contemporary residential construction with cutting-edge design and sustainable features.",
-      "startDate": "2023-08-20",
-      "estimatedCompletion": "2024-12-31"
+      "description": "Fire rebuild SFR construction with pad development, foundation, utility installation, and security camera & fence installation.",
+      "startDate": "2025",
+      "estimatedCompletion": "2026"
     }
   ]
 }
