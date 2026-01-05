@@ -15,7 +15,7 @@ Each project requires the following fields:
   "id": "unique-project-id",           // Unique identifier (lowercase, no spaces)
   "name": "Project Name",              // Display name
   "projectId": "#PROJECT-2024-01",     // Project ID/Reference
-  "status": "Active",                  // Status: "Active", "In Progress", "Final Phase", "Completed"
+  "status": "Active",                  // Status: "Active", "In Progress", "Final Phase", "Completed", "Scheduled"
   "address": "123 Main St, City, CA 12345",  // Full street address (REQUIRED)
   "coordinates": {
     "lat": 38.2975,                    // Latitude (for map marker placement)
@@ -50,7 +50,7 @@ Each project requires the following fields:
    - `projectId` - Your project reference number (e.g., "#PROJ-2024-01")
    - `address` - Full street address
    - `coordinates.lat` and `coordinates.lng` - Get from Google Maps (right-click location)
-   - `status` - "Active", "In Progress", "Final Phase", or "Completed"
+   - `status` - "Active", "In Progress", "Final Phase", "Completed", or "Scheduled"
    - `features` - Array of project highlights
 5. **Add a comma** after the previous project if needed
 6. Save the file
@@ -89,6 +89,7 @@ To find coordinates for an address:
 - **In Progress**: Blue (#3B82F6)
 - **Final Phase**: Green (#10B981)
 - **Completed**: Gray (#6B7280)
+- **Scheduled**: Purple (#A855F7) - For projects that are contracted but not yet started
 
 ### Get Directions Feature
 

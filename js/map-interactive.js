@@ -184,7 +184,8 @@ function createMarker(project) {
         'Active': '#FFC107',
         'In Progress': '#3B82F6',
         'Final Phase': '#10B981',
-        'Completed': '#6B7280'
+        'Completed': '#6B7280',
+        'Scheduled': '#A855F7'
     };
 
     const markerColor = statusColors[project.status] || '#6B7280';
@@ -235,7 +236,8 @@ function createPopupContent(project) {
         'Active': '#FFC107',
         'In Progress': '#3B82F6',
         'Final Phase': '#10B981',
-        'Completed': '#6B7280'
+        'Completed': '#6B7280',
+        'Scheduled': '#A855F7'
     };
 
     const statusColor = statusColors[project.status] || '#6B7280';
@@ -567,7 +569,9 @@ function renderSummaryCards() {
         const statusColors = {
             'Active': '#FFC107',
             'In Progress': '#3B82F6',
-            'Final Phase': '#10B981'
+            'Final Phase': '#10B981',
+            'Completed': '#6B7280',
+            'Scheduled': '#A855F7'
         };
 
         card.innerHTML = `

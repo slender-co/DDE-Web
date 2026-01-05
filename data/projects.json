@@ -101,6 +101,32 @@
       "startDate": "2025",
       "estimatedCompletion": "2026"
     }
+    {
+      "id": "North Marengo",
+      "name": "Single Family Residence",
+      "projectId": "#NMR-2026",
+      "status": "Scheduled",
+      "address": "2867 North Marengo Avenue, Altadena, CA 91001",
+      "coordinates": {
+        "lat": 34.1940654,
+        "lng": -118.1405786,
+        "display": "34.1940654° N, 118.1405786° W"
+      },
+      "jobSize": "Small Scale",
+      "workType": "Residential Construction",
+      "type": "Residential",
+      "category": "Residential",
+      "features": [
+        "Pad Development / Site Work",
+        "Foundation / Curb & Gutter",
+        "Erosion Control / Soil Stabilization",
+        "Wet & Dry Utility Installation",
+        "Security Camera & Fence Installation"
+      ],
+      "description": "Residential construction with pad development, foundation, utility installation, and security camera & fence installation.",
+      "startDate": "2026",
+      "estimatedCompletion": "2026"
+    }
   ]
 }
 
