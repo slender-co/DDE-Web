@@ -76,6 +76,30 @@
       "description": "Fire rebuild SFR construction with pad development, foundation, utility installation, and security camera & fence installation.",
       "startDate": "2025",
       "estimatedCompletion": "2026"
+    },
+    {
+      "id": "Old Barn Road",
+      "name": "Single Family Residence",
+      "projectId": "#OBR-2025",
+      "status": "In-Progress",
+      "address": "4106 Old Barn Rd, Healdsburg, CA 95448",
+      "coordinates": {
+        "lat": 38.6434441,
+        "lng": -122.8130937,
+        "display": "38.6434441° N, 122.8130937° W"
+      },
+      "jobSize": "Small Scale",
+      "workType": "Residential Foundation",
+      "type": "Residential",
+      "category": "Residential",
+      "features": [
+        "Pad Development / Site Work",
+        "Foundation / Terraced Retaining Wall",
+        "Erosion Control / Soil Stabilization",
+      ],
+      "description": "Residential foundation and erosion control work with pad development and terraced retaining wall.",
+      "startDate": "2025",
+      "estimatedCompletion": "2026"
     }
   ]
 }
