@@ -1,0 +1,197 @@
+{
+  "_README": "Full project gallery data. Each item needs: id (unique), title, image (path), category (for filtering), description (optional), and tags (optional array). Categories: grading, concrete, foundation, utility, site-work. Reference codes: GAL = Gallery item, numbered sequentially.",
+  "items": [
+    {
+      "id": "gal-01",
+      "title": "GAL-01",
+      "image": "images/20240719_092733.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-02",
+      "title": "GAL-02",
+      "image": "images/20240907_122739.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-03",
+      "title": "GAL-03",
+      "image": "images/20240909_185145.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-04",
+      "title": "GAL-04",
+      "image": "images/20241011_115537.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-05",
+      "title": "GAL-05",
+      "image": "images/20241012_091900.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-06",
+      "title": "GAL-06",
+      "image": "images/20241024_143146.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-07",
+      "title": "GAL-07",
+      "image": "images/20241119_180344.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-08",
+      "title": "GAL-08",
+      "image": "images/20241119_180550.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-09",
+      "title": "GAL-09",
+      "image": "images/20241119_180741.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-10",
+      "title": "GAL-10",
+      "image": "images/20250217_094727.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-11",
+      "title": "GAL-11",
+      "image": "images/20250227_093537.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-12",
+      "title": "GAL-12",
+      "image": "images/20250227_093543.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-13",
+      "title": "GAL-13",
+      "image": "images/20250602_103326.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-14",
+      "title": "GAL-14",
+      "image": "images/20250613_185735.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-15",
+      "title": "GAL-15",
+      "image": "images/20250813_093926.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-16",
+      "title": "GAL-16",
+      "image": "images/20250818_174802.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-17",
+      "title": "GAL-17",
+      "image": "images/20250826_125050.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-18",
+      "title": "GAL-18",
+      "image": "images/20250916_113744.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-19",
+      "title": "GAL-19",
+      "image": "images/20250917_174042.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-20",
+      "title": "GAL-20",
+      "image": "images/20250918_165625.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-21",
+      "title": "GAL-21",
+      "image": "images/20250920_125735.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-22",
+      "title": "GAL-22",
+      "image": "images/20251022_135521.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-23",
+      "title": "GAL-23",
+      "image": "images/20251024_115247.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    },
+    {
+      "id": "gal-24",
+      "title": "GAL-24",
+      "image": "images/IMG_2725.jpg",
+      "category": "site-work",
+      "description": "Project gallery image",
+      "tags": []
+    }
+  ]
+}
