@@ -154,7 +154,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 bg-[#FFC107]/10 rounded-full blur-2xl"></div>
-                    <img src="images/good-pour-sthelena.jpg" class="rounded-lg shadow-2xl relative z-10 w-full object-cover h-[500px] grayscale hover:grayscale-0 transition-all duration-700" alt="Construction team at work">
+                    <div class="relative z-10 w-full h-[500px] rounded-lg shadow-2xl overflow-hidden">
+                        <!-- Cycling Images -->
+                        <img src="images/good-pour-sthelena.jpg" class="about-cycle-image active rounded-lg" alt="Construction team at work">
+                        <img src="images/hbg-pour-curb.jpg" class="about-cycle-image rounded-lg" alt="HBG pour curb">
+                        <img src="images/firridge-current.jpg" class="about-cycle-image rounded-lg" alt="Fir Ridge current">
+                        <img src="images/roundbarn-good.jpg" class="about-cycle-image rounded-lg" alt="Round barn good">
+                    </div>
                     <div class="absolute -bottom-6 -right-6 bg-[#1a1a1a] p-6 rounded-lg shadow-xl z-20 hidden md:block">
                         <p class="text-white text-sm font-medium italic">"Building the future, restoring the past."</p>
                     </div>
@@ -1315,6 +1321,38 @@
         }
     </script>
     
+    <!-- About Section Image Cycling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.about-cycle-image');
+            
+            if (images.length === 0) {
+                console.log('No images found for cycling');
+                return;
+            }
+            
+            console.log('Found', images.length, 'images for cycling');
+            
+            let currentIndex = 0;
+            const cycleDuration = 2000; // 2 seconds per image
+            
+            // Function to cycle to next image
+            function cycleImages() {
+                // Remove active class from current image
+                images[currentIndex].classList.remove('active');
+                
+                // Move to next image
+                currentIndex = (currentIndex + 1) % images.length;
+                
+                // Add active class to next image
+                images[currentIndex].classList.add('active');
+            }
+            
+            // Start cycling immediately
+            console.log('Starting image cycle');
+            setInterval(cycleImages, cycleDuration);
+        });
+    </script>
 </body>
 </html>
 
