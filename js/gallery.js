@@ -5,6 +5,8 @@
 
 let galleryData = [];
 let currentFilter = 'all';
+let filteredItems = [];
+let currentImageIndex = 0;
 
 /**
  * Load gallery data from JSON file
@@ -49,8 +51,8 @@ function renderGallery() {
     const grid = document.getElementById('gallery-grid');
     if (!grid) return;
     
-    // Filter items
-    const filteredItems = currentFilter === 'all' 
+    // Filter items and store globally
+    filteredItems = currentFilter === 'all' 
         ? galleryData 
         : galleryData.filter(item => item.category === currentFilter);
     
@@ -80,12 +82,12 @@ function renderGallery() {
     `).join('');
     
     // Add click handlers for lightbox
-    document.querySelectorAll('.gallery-item').forEach(item => {
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
         item.addEventListener('click', () => {
             const itemId = item.dataset.id;
-            const galleryItem = galleryData.find(i => i.id === itemId);
-            if (galleryItem) {
-                openLightbox(galleryItem);
+            const itemIndex = filteredItems.findIndex(i => i.id === itemId);
+            if (itemIndex !== -1) {
+                openLightbox(itemIndex);
             }
         });
     });
@@ -94,22 +96,54 @@ function renderGallery() {
 /**
  * Open lightbox with image
  */
-function openLightbox(item) {
+function openLightbox(index) {
     const lightbox = document.getElementById('gallery-lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxTitle = document.getElementById('lightbox-title');
     const lightboxDescription = document.getElementById('lightbox-description');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
     
-    if (!lightbox || !lightboxImage) return;
+    if (!lightbox || !lightboxImage || !filteredItems.length) return;
+    
+    currentImageIndex = index;
+    const item = filteredItems[index];
     
     lightboxImage.src = item.image;
     lightboxImage.alt = item.title;
     lightboxTitle.textContent = item.title;
     lightboxDescription.textContent = item.description || '';
     
+    // Show/hide navigation arrows based on number of items
+    if (filteredItems.length > 1) {
+        if (prevBtn) prevBtn.classList.remove('hidden');
+        if (nextBtn) nextBtn.classList.remove('hidden');
+    } else {
+        if (prevBtn) prevBtn.classList.add('hidden');
+        if (nextBtn) nextBtn.classList.add('hidden');
+    }
+    
     lightbox.classList.remove('hidden');
     lightbox.classList.add('flex');
     document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Navigate to previous image
+ */
+function navigatePrevious() {
+    if (filteredItems.length === 0) return;
+    currentImageIndex = (currentImageIndex - 1 + filteredItems.length) % filteredItems.length;
+    openLightbox(currentImageIndex);
+}
+
+/**
+ * Navigate to next image
+ */
+function navigateNext() {
+    if (filteredItems.length === 0) return;
+    currentImageIndex = (currentImageIndex + 1) % filteredItems.length;
+    openLightbox(currentImageIndex);
 }
 
 /**
@@ -142,9 +176,25 @@ function initializeGallery() {
     // Lightbox close handlers
     const lightboxClose = document.getElementById('lightbox-close');
     const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
     
     if (lightboxClose) {
         lightboxClose.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigatePrevious();
+        });
+    }
+    
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateNext();
+        });
     }
     
     if (lightbox) {
@@ -155,10 +205,19 @@ function initializeGallery() {
         });
     }
     
-    // Close on Escape key
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('gallery-lightbox');
+        if (!lightbox || lightbox.classList.contains('hidden')) return;
+        
         if (e.key === 'Escape') {
             closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigatePrevious();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigateNext();
         }
     });
 }

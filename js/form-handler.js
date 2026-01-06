@@ -191,24 +191,70 @@ function showMessage(message, type = 'success') {
 }
 
 /**
- * Submit form data
- * In production, replace this with actual API call
+ * Submit form data using EmailJS
+ * Sends email to btslender@dirtdudesexcavating.com
+ * 
+ * SETUP INSTRUCTIONS:
+ * 1. Go to https://www.emailjs.com/ and create a free account
+ * 2. Create an Email Service (Gmail, Outlook, etc.) and connect your email
+ * 3. Create an Email Template with these variables:
+ *    - {{from_name}} - Sender's name
+ *    - {{from_email}} - Sender's email
+ *    - {{phone}} - Phone number
+ *    - {{message}} - Project details
+ *    - {{subject}} - Email subject
+ * 4. Get your Service ID, Template ID, and Public Key from EmailJS dashboard
+ * 5. Replace the placeholder values below with your actual IDs
  */
 async function submitForm(data) {
-    // Simulate API call
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            // In production, you would do:
-            // const response = await fetch('/api/contact', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(data)
-            // });
-            // return await response.json();
-            
-            // For demo purposes, always succeed
-            resolve({ success: true, message: 'Message sent successfully' });
-        }, 1000);
-    });
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS is not loaded. Please include the EmailJS script.');
+        throw new Error('Email service not configured');
+    }
+    
+    // ============================================
+    // EMAILJS CONFIGURATION - REPLACE THESE VALUES
+    // ============================================
+    const SERVICE_ID = 'service_w811qhj'; // Get from EmailJS Dashboard > Email Services
+    const TEMPLATE_ID = 'template_ot4es8q'; // Get from EmailJS Dashboard > Email Templates
+    const PUBLIC_KEY = 't7-DD82nS9IboYouv'; // Get from EmailJS Dashboard > Account > API Keys
+    
+    // Check if configuration is set
+    if (SERVICE_ID === 'YOUR_SERVICE_ID' || TEMPLATE_ID === 'YOUR_TEMPLATE_ID' || PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+        console.error('EmailJS not configured. Please set SERVICE_ID, TEMPLATE_ID, and PUBLIC_KEY in form-handler.js');
+        // Fallback: show instructions to user
+        throw new Error('Email service is being configured. Please contact us directly at btslender@dirtdudesexcavating.com');
+    }
+    
+    // Initialize EmailJS with public key
+    emailjs.init(PUBLIC_KEY);
+    
+    // Prepare email template parameters
+    // These variable names must match your EmailJS template variables
+    const templateParams = {
+        to_email: 'btslender@dirtdudesexcavating.com',
+        from_name: `${data.firstName} ${data.lastName}`,
+        from_email: data.email,
+        phone: data.phone || 'Not provided',
+        message: data.projectDetails,
+        subject: `New Contact Form Submission from ${data.firstName} ${data.lastName}`,
+        timestamp: new Date().toLocaleString(),
+        reply_to: data.email // Allows you to reply directly to the sender
+    };
+    
+    try {
+        // Send email using EmailJS
+        const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+        
+        if (response.status === 200 || response.text === 'OK') {
+            return { success: true, message: 'Message sent successfully' };
+        } else {
+            throw new Error('Failed to send email');
+        }
+    } catch (error) {
+        console.error('EmailJS error:', error);
+        throw new Error('Failed to send message. Please try again or contact us directly at btslender@dirtdudesexcavating.com');
+    }
 }
 
