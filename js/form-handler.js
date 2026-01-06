@@ -232,8 +232,10 @@ async function submitForm(data) {
     
     // Prepare email template parameters
     // These variable names must match your EmailJS template variables
+    // For SMTP, make sure 'to_email' is set in your template OR passed here
     const templateParams = {
-        to_email: 'btslender@dirtdudesexcavating.com',
+        to_email: 'btslender@dirtdudesexcavating.com', // Required for SMTP
+        to_name: 'Dirt Dudes Excavating', // Optional recipient name
         from_name: `${data.firstName} ${data.lastName}`,
         from_email: data.email,
         phone: data.phone || 'Not provided',
@@ -245,7 +247,10 @@ async function submitForm(data) {
     
     try {
         // Send email using EmailJS
+        console.log('Sending email with params:', templateParams);
         const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+        
+        console.log('EmailJS response:', response);
         
         if (response.status === 200 || response.text === 'OK') {
             return { success: true, message: 'Message sent successfully' };
@@ -253,8 +258,19 @@ async function submitForm(data) {
             throw new Error('Failed to send email');
         }
     } catch (error) {
-        console.error('EmailJS error:', error);
-        throw new Error('Failed to send message. Please try again or contact us directly at btslender@dirtdudesexcavating.com');
+        console.error('EmailJS error details:', error);
+        console.error('Error code:', error?.code);
+        console.error('Error text:', error?.text);
+        console.error('Error message:', error?.message);
+        
+        // More specific error message
+        let errorMsg = 'Failed to send message. ';
+        if (error?.text) {
+            errorMsg += `Error: ${error.text}. `;
+        }
+        errorMsg += 'Please try again or contact us directly at btslender@dirtdudesexcavating.com';
+        
+        throw new Error(errorMsg);
     }
 }
 
