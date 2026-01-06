@@ -3,58 +3,58 @@
   "items": [
     {
       "id": "gal-01",
-      "title": "GAL-01",
+      "title": "Willits Ranch",
       "image": "images/20240719_092733.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Site Restoration",
       "tags": []
     },
     {
       "id": "gal-02",
-      "title": "GAL-02",
+      "title": "West Coast Diesels: Annual Tractor Pull / Show n' Shine",
       "image": "images/20240907_122739.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Charity Event",
       "tags": []
     },
     {
       "id": "gal-03",
-      "title": "GAL-03",
+      "title": "3 Healdsburg Ave",
       "image": "images/20240909_185145.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "grading",
+      "description": "Multi-Family Development",
       "tags": []
     },
     {
       "id": "gal-04",
-      "title": "GAL-04",
+      "title": "Willits Ranch",
       "image": "images/20241011_115537.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Road Development",
       "tags": []
     },
     {
       "id": "gal-05",
-      "title": "GAL-05",
+      "title": "Willits Ranch",
       "image": "images/20241012_091900.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Campground Development",
       "tags": []
     },
     {
       "id": "gal-06",
-      "title": "GAL-06",
+      "title": "Fir Ridge: Residential Subdivision",
       "image": "images/20241024_143146.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Street Tie-Ins",
       "tags": []
     },
     {
       "id": "gal-07",
-      "title": "GAL-07",
+      "title": "Fir Ridge: Residential Subdivision",
       "image": "images/20241119_180344.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Foundation Pour",
       "tags": []
     },
     {
