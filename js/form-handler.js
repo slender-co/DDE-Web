@@ -295,7 +295,7 @@ async function sendConfirmationEmail(data) {
     // CONFIRMATION EMAIL CONFIGURATION
     // ============================================
     const SERVICE_ID = 'service_w811qhj'; // Same service as main email
-    const CONFIRMATION_TEMPLATE_ID = 'template_z6ad4lu'; // NEW: Create this template in EmailJS
+    const CONFIRMATION_TEMPLATE_ID = 'template_9czeyz4'; // NEW: Create this template in EmailJS
     const PUBLIC_KEY = 't7-DD82nS9IboYouv'; // Same public key
     
     // Check if confirmation template is configured
@@ -326,15 +326,21 @@ async function sendConfirmationEmail(data) {
     
     try {
         // Send confirmation email
+        console.log('Sending confirmation email with params:', confirmationParams);
         const response = await emailjs.send(SERVICE_ID, CONFIRMATION_TEMPLATE_ID, confirmationParams);
         
+        console.log('Confirmation email response:', response);
+        
         if (response.status === 200 || response.text === 'OK') {
-            console.log('Confirmation email sent successfully');
+            console.log('Confirmation email sent successfully to:', data.email);
         } else {
-            console.warn('Confirmation email may have failed');
+            console.warn('Confirmation email may have failed. Response:', response);
         }
     } catch (error) {
-        console.warn('Confirmation email error:', error);
+        console.error('Confirmation email error details:', error);
+        console.error('Error code:', error?.code);
+        console.error('Error text:', error?.text);
+        console.error('Error message:', error?.message);
         // Don't throw - we don't want confirmation failures to break the form
     }
 }
