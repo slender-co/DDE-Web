@@ -54,15 +54,21 @@ async function handleFormSubmit(e) {
     };
     
     try {
-        // In a real application, you would send this to your backend
-        // For now, we'll simulate an API call
+        // Send both emails: one to business, one confirmation to user
         const response = await submitForm(data);
         
         if (response.success) {
+            // Send confirmation email to user
+            try {
+                await sendConfirmationEmail(data);
+            } catch (confirmationError) {
+                // Don't fail the whole submission if confirmation fails
+                console.warn('Confirmation email failed:', confirmationError);
+            }
+            
             showMessage('Thank you! Your message has been sent. We\'ll get back to you soon.', 'success');
             form.reset();
             
-            // Log to console (in production, this would go to your backend)
             console.log('Form submitted:', data);
         } else {
             throw new Error(response.message || 'Failed to send message');
@@ -274,3 +280,61 @@ async function submitForm(data) {
     }
 }
 
+/**
+ * Send confirmation email to the user who submitted the form
+ * Uses a separate EmailJS template for the auto-reply
+ */
+async function sendConfirmationEmail(data) {
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS is not loaded.');
+        return; // Don't throw error, just fail silently
+    }
+    
+    // ============================================
+    // CONFIRMATION EMAIL CONFIGURATION
+    // ============================================
+    const SERVICE_ID = 'service_w811qhj'; // Same service as main email
+    const CONFIRMATION_TEMPLATE_ID = 'template_z6ad4lu'; // NEW: Create this template in EmailJS
+    const PUBLIC_KEY = 't7-DD82nS9IboYouv'; // Same public key
+    
+    // Check if confirmation template is configured
+    if (CONFIRMATION_TEMPLATE_ID === 'YOUR_CONFIRMATION_TEMPLATE_ID') {
+        console.warn('Confirmation email template not configured. Skipping confirmation email.');
+        return; // Don't throw error, just skip
+    }
+    
+    // Initialize EmailJS (if not already initialized)
+    emailjs.init(PUBLIC_KEY);
+    
+    // Prepare confirmation email template parameters
+    const confirmationParams = {
+        to_email: data.email, // Send to the person who submitted the form
+        to_name: `${data.firstName} ${data.lastName}`,
+        from_name: 'Dirt Dudes Excavating',
+        from_email: 'btslender@dirtdudesexcavating.com',
+        customer_name: `${data.firstName} ${data.lastName}`,
+        submission_date: new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        }),
+        contact_email: 'btslender@dirtdudesexcavating.com',
+        contact_phone: '(Your phone number here)' // Optional: Add your phone number
+    };
+    
+    try {
+        // Send confirmation email
+        const response = await emailjs.send(SERVICE_ID, CONFIRMATION_TEMPLATE_ID, confirmationParams);
+        
+        if (response.status === 200 || response.text === 'OK') {
+            console.log('Confirmation email sent successfully');
+        } else {
+            console.warn('Confirmation email may have failed');
+        }
+    } catch (error) {
+        console.warn('Confirmation email error:', error);
+        // Don't throw - we don't want confirmation failures to break the form
+    }
+}
