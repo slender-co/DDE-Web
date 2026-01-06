@@ -29,7 +29,7 @@
 <body class="antialiased selection:bg-[#FFC107]/30 selection:text-[#F57C00] overflow-x-hidden text-stone-800 bg-[#F4F1EA]">
 
     <!-- Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 w-full p-4 md:p-6 transition-all duration-300" id="header">
+    <header class="fixed top-0 left-0 right-0 z-50 w-full px-4 pt-6 pb-4 md:px-6 md:pt-8 md:pb-6 transition-all duration-300" id="header">
         <div class="max-w-[1920px] mx-auto bg-white/90 backdrop-blur-md border border-stone-200/50 rounded-xl px-6 py-4 flex justify-between items-center shadow-lg shadow-stone-900/5">
             <a href="./index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                 <div class="bg-white rounded-lg p-1.5 flex items-center justify-center">
@@ -41,17 +41,16 @@
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8">
+            <nav class="hidden md:flex items-center justify-center gap-8">
                 <a href="./index.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="home">Home</a>
                 <a href="./index.html#about" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide" data-nav="about">About</a>
                 <a href="./services.html" class="nav-link text-sm font-semibold text-[#FFC107] transition-colors uppercase tracking-wide border-b-2 border-[#FFC107]" data-nav="services">Services</a>
-                <div class="relative group" id="projects-dropdown">
-                    <a href="./index.html#projects" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide flex items-center gap-1" data-nav="projects">
+                <div class="relative group flex items-center" id="projects-dropdown">
+                    <a href="./index.html#word-gallery" class="nav-link text-sm font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide flex items-center gap-1" data-nav="projects">
                         Projects
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down w-4 h-4 transition-transform group-hover:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
                     </a>
                     <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-stone-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <a href="./index.html#projects" class="block px-4 py-3 text-sm text-stone-600 hover:bg-[#FFC107]/10 hover:text-[#FFC107] transition-colors uppercase tracking-wide border-b border-stone-100">Project Portfolio</a>
                         <a href="./gallery.html" class="block px-4 py-3 text-sm text-stone-600 hover:bg-[#FFC107]/10 hover:text-[#FFC107] transition-colors uppercase tracking-wide">Gallery</a>
                     </div>
                 </div>
@@ -80,8 +79,13 @@
                     <a href="./index.html#about" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="about">About</a>
                     <a href="./services.html" class="text-lg font-semibold text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="services">Services</a>
                     <div class="flex flex-col gap-2">
-                        <a href="./index.html#projects" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="projects">Project Portfolio</a>
-                        <a href="./gallery.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link pl-4">Gallery</a>
+                        <button class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link flex items-center justify-between w-full text-left" id="mobile-projects-toggle">
+                            Projects
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down w-5 h-5 transition-transform" id="mobile-projects-chevron"><path d="m6 9 6 6 6-6"></path></svg>
+                        </button>
+                        <div class="hidden flex-col gap-2 pl-4" id="mobile-projects-dropdown">
+                            <a href="./gallery.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link">Gallery</a>
+                        </div>
                     </div>
                     <a href="./index.html#locations" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="locations">Active Sites</a>
                     <a href="./altadena.html" class="text-lg font-semibold text-stone-600 hover:text-[#FFC107] transition-colors uppercase tracking-wide mobile-nav-link" data-nav="altadena">Altadena</a>

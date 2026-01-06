@@ -29,7 +29,7 @@
       "id": "gal-04",
       "title": "Willits Ranch",
       "image": "images/20241011_115537.jpg",
-      "category": "site-work",
+      "category": "grading",
       "description": "Road Development",
       "tags": []
     },
@@ -59,138 +59,138 @@
     },
     {
       "id": "gal-08",
-      "title": "GAL-08",
+      "title": "Fir Ridge: Residential Subdivision",
       "image": "images/20241119_180550.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Foundation Pour",
       "tags": []
     },
     {
       "id": "gal-09",
-      "title": "GAL-09",
+      "title": "Fir Ridge: Residential Subdivision",
       "image": "images/20241119_180741.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Foundation Pour",
       "tags": []
     },
     {
       "id": "gal-10",
-      "title": "GAL-10",
+      "title": "Bishop Ranch",
       "image": "images/20250217_094727.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "TI Improvements",
       "tags": []
     },
     {
       "id": "gal-11",
-      "title": "GAL-11",
+      "title": "Paving Preparation",
       "image": "images/20250227_093537.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Commercial Parking Lot - NorCal",
       "tags": []
     },
     {
       "id": "gal-12",
-      "title": "GAL-12",
+      "title": "Paving Preparation",
       "image": "images/20250227_093543.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Commercial Parking Lot - NorCal",
       "tags": []
     },
     {
       "id": "gal-13",
-      "title": "GAL-13",
+      "title": "SMF Airport",
       "image": "images/20250602_103326.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "utility",
+      "description": "Staging Yard - Utility Installation Project",
       "tags": []
     },
     {
       "id": "gal-14",
-      "title": "GAL-14",
+      "title": "Site Preparation",
       "image": "images/20250613_185735.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "grading",
+      "description": "Sonoma Residential Development",
       "tags": []
     },
     {
       "id": "gal-15",
-      "title": "GAL-15",
+      "title": "Equipment Delivery",
       "image": "images/20250813_093926.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-16",
-      "title": "GAL-16",
+      "title": "Staging Yard",
       "image": "images/20250818_174802.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-17",
-      "title": "GAL-17",
+      "title": "Pad Development - 11 Lot Subdivision",
       "image": "images/20250826_125050.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "grading",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-18",
-      "title": "GAL-18",
+      "title": "Foundation Layout - 21 Lot Subdivision",
       "image": "images/20250916_113744.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-19",
-      "title": "GAL-19",
+      "title": "Staging Yard",
       "image": "images/20250917_174042.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-20",
-      "title": "GAL-20",
+      "title": "Foundation Layout - 21 Lot Subdivision",
       "image": "images/20250918_165625.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-21",
-      "title": "GAL-21",
+      "title": "Matt Slab Prep - Utility/Plumbing Installation",
       "image": "images/20250920_125735.jpg",
-      "category": "site-work",
+      "category": "utility",
       "description": "Project gallery image",
       "tags": []
     },
     {
       "id": "gal-22",
-      "title": "GAL-22",
+      "title": "Fir Ridge: Residential Subdivision",
       "image": "images/20251022_135521.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "grading",
+      "description": "Road Sub-grade",
       "tags": []
     },
     {
       "id": "gal-23",
-      "title": "GAL-23",
+      "title": "Foundation Pour - 21 Lot Subdivision",
       "image": "images/20251024_115247.jpg",
-      "category": "site-work",
-      "description": "Project gallery image",
+      "category": "concrete",
+      "description": "Hembree Lane Oaks Residential Development",
       "tags": []
     },
     {
       "id": "gal-24",
-      "title": "GAL-24",
+      "title": "Parker Hill Road - Residential Development",
       "image": "images/IMG_2725.jpg",
       "category": "site-work",
-      "description": "Project gallery image",
+      "description": "Foundation Preparation",
       "tags": []
     }
   ]

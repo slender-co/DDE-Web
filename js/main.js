@@ -234,6 +234,26 @@ function initializeNavigation() {
             }
         });
     }
+    
+    // Mobile projects dropdown toggle
+    const mobileProjectsToggle = document.getElementById('mobile-projects-toggle');
+    const mobileProjectsDropdown = document.getElementById('mobile-projects-dropdown');
+    const mobileProjectsChevron = document.getElementById('mobile-projects-chevron');
+    
+    if (mobileProjectsToggle && mobileProjectsDropdown && mobileProjectsChevron) {
+        mobileProjectsToggle.addEventListener('click', () => {
+            const isHidden = mobileProjectsDropdown.classList.contains('hidden');
+            if (isHidden) {
+                mobileProjectsDropdown.classList.remove('hidden');
+                mobileProjectsDropdown.classList.add('flex');
+                mobileProjectsChevron.style.transform = 'rotate(180deg)';
+            } else {
+                mobileProjectsDropdown.classList.add('hidden');
+                mobileProjectsDropdown.classList.remove('flex');
+                mobileProjectsChevron.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
 }
 
 /**
@@ -364,6 +384,15 @@ function closeMobileMenu() {
     if (mobileMenu) {
         mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
+    }
+    
+    // Reset mobile projects dropdown
+    const mobileProjectsDropdown = document.getElementById('mobile-projects-dropdown');
+    const mobileProjectsChevron = document.getElementById('mobile-projects-chevron');
+    if (mobileProjectsDropdown && mobileProjectsChevron) {
+        mobileProjectsDropdown.classList.add('hidden');
+        mobileProjectsDropdown.classList.remove('flex');
+        mobileProjectsChevron.style.transform = 'rotate(0deg)';
     }
 }
 
