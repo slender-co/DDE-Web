@@ -1,0 +1,203 @@
+{
+  "_README": "Featured projects for the highlight section within Active Sites. These are your biggest/most impressive projects that deserve special storytelling treatment.",
+  "featuredProjects": [
+    {
+      "id": "HBG",
+      "name": "3 Healdsburg",
+      "projectId": "#HBG-2023",
+      "tagline": "Transforming Downtown Healdsburg",
+      "status": "Final Phase",
+      "category": "Multi-Family Development",
+      "location": "Healdsburg, CA",
+      "startDate": "October 2023",
+      "completionDate": "2026",
+      "description": "A landmark multi-family development project in the heart of downtown Healdsburg. This large-scale site development encompasses comprehensive pad development, utility infrastructure, and concrete foundation work, setting a new standard for urban residential construction in Sonoma County.",
+      "highlights": [
+        "Large-scale site development with precision grading",
+        "Complete wet & dry utility infrastructure",
+        "Extensive foundation and slab work",
+        "Curb & gutter and street improvements"
+      ],
+      "stats": {
+        "units": "50+",
+        "squareFeet": "150,000+",
+        "duration": "3 Years"
+      },
+      "images": [
+        {
+          "src": "images/hbg-start.jpg",
+          "alt": "3 Healdsburg initial site preparation",
+          "caption": "Initial site preparation and planning"
+        },
+        {
+          "src": "images/hbg-pour-1.jpg",
+          "alt": "3 Healdsburg concrete pour",
+          "caption": "Major concrete pour operations"
+        },
+        {
+          "src": "images/hbg-pour-curb.jpg",
+          "alt": "3 Healdsburg curb and gutter work",
+          "caption": "Curb and gutter installation"
+        },
+        {
+          "src": "images/hbg-pour-good.jpg",
+          "alt": "3 Healdsburg completed work",
+          "caption": "Completed foundation work"
+        }
+      ],
+      "timeline": [
+        {
+          "phase": "Phase 1",
+          "title": "Site Preparation",
+          "date": "Q4 2023",
+          "description": "Comprehensive land clearing, grading, and pad development to prepare the site for construction."
+        },
+        {
+          "phase": "Phase 2",
+          "title": "Utility Infrastructure",
+          "date": "2024",
+          "description": "Installation of complete wet and dry utility systems including water, sewer, electrical, and gas."
+        },
+        {
+          "phase": "Phase 3",
+          "title": "Foundation & Concrete",
+          "date": "2024-2025",
+          "description": "Extensive foundation work, slab preparation, and concrete installation for all structures."
+        },
+        {
+          "phase": "Phase 4",
+          "title": "Final Phase",
+          "date": "2025-2026",
+          "description": "Curb, gutter, and street improvements, final site work, and project completion."
+        }
+      ]
+    },
+    {
+      "id": "Hummingbird",
+      "name": "Hembree Lane Oaks",
+      "projectId": "#HL-2024",
+      "tagline": "Master-Planned Residential Community",
+      "status": "Active",
+      "category": "Residential Subdivision",
+      "location": "Windsor, CA",
+      "startDate": "2024",
+      "completionDate": "2026",
+      "description": "A master-planned residential subdivision development featuring comprehensive land clearing, grading, and infrastructure installation. This project showcases our expertise in large-scale residential development with precision site work and attention to detail.",
+      "highlights": [
+        "Master-planned residential subdivision",
+        "Comprehensive land clearing and development",
+        "Access road construction",
+        "Advanced drainage solutions"
+      ],
+      "stats": {
+        "lots": "25+",
+        "acres": "15+",
+        "duration": "2 Years"
+      },
+      "images": [
+        {
+          "src": "images/fir-ridge-start.jpg",
+          "alt": "Hembree Lane Oaks site development",
+          "caption": "Initial land clearing and development"
+        },
+        {
+          "src": "images/firridge-current.jpg",
+          "alt": "Hembree Lane Oaks current progress",
+          "caption": "Current development progress"
+        }
+      ],
+      "timeline": [
+        {
+          "phase": "Phase 1",
+          "title": "Land Clearing & Grading",
+          "date": "2024",
+          "description": "Comprehensive land clearing, site grading, and pad development for the entire subdivision."
+        },
+        {
+          "phase": "Phase 2",
+          "title": "Infrastructure Development",
+          "date": "2024-2025",
+          "description": "Construction of access roads, drainage systems, and utility infrastructure throughout the development."
+        },
+        {
+          "phase": "Phase 3",
+          "title": "Foundation Work",
+          "date": "2025",
+          "description": "Foundation and concrete work for residential structures across all lots."
+        },
+        {
+          "phase": "Phase 4",
+          "title": "Completion",
+          "date": "2026",
+          "description": "Final site improvements, landscaping preparation, and project completion."
+        }
+      ]
+    },
+    {
+      "id": "Marigold",
+      "name": "388 S Marigold Ave",
+      "projectId": "#SFM-2025",
+      "tagline": "Fire Rebuild Excellence",
+      "status": "In Progress",
+      "category": "Residential Construction",
+      "location": "Altadena, CA",
+      "startDate": "2025",
+      "completionDate": "2026",
+      "description": "A complete fire rebuild project demonstrating our expertise in residential construction. From initial pad development through foundation work, utility installation, and security systems, this project represents our commitment to rebuilding communities with care and precision.",
+      "highlights": [
+        "Complete fire rebuild construction",
+        "Pad development and site preparation",
+        "Foundation and curb & gutter work",
+        "Security camera and fence installation"
+      ],
+      "stats": {
+        "squareFeet": "3,500+",
+        "duration": "1 Year",
+        "features": "4+"
+      },
+      "images": [
+        {
+          "src": "images/388SMarigold_Pre.JPG",
+          "alt": "388 S Marigold pre-construction",
+          "caption": "Pre-construction site assessment"
+        },
+        {
+          "src": "images/388SMarigold_During.jpg",
+          "alt": "388 S Marigold during construction",
+          "caption": "Foundation work in progress"
+        },
+        {
+          "src": "images/388SMarigold_BackPad.jpg",
+          "alt": "388 S Marigold back pad work",
+          "caption": "Back pad development"
+        }
+      ],
+      "timeline": [
+        {
+          "phase": "Phase 1",
+          "title": "Site Assessment & Planning",
+          "date": "Q1 2025",
+          "description": "Comprehensive site assessment, planning, and permit acquisition for the rebuild project."
+        },
+        {
+          "phase": "Phase 2",
+          "title": "Pad Development",
+          "date": "Q1-Q2 2025",
+          "description": "Site preparation, grading, and pad development to prepare for foundation work."
+        },
+        {
+          "phase": "Phase 3",
+          "title": "Foundation & Utilities",
+          "date": "Q2-Q3 2025",
+          "description": "Foundation installation, utility connections, and curb & gutter work."
+        },
+        {
+          "phase": "Phase 4",
+          "title": "Final Installation",
+          "date": "Q4 2025 - Q1 2026",
+          "description": "Security systems, fence installation, and final site improvements."
+        }
+      ]
+    }
+  ]
+}
