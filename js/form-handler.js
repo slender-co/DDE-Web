@@ -236,7 +236,8 @@ async function submitForm(data) {
     // Initialize EmailJS with public key
     emailjs.init(PUBLIC_KEY);
 
-    // Get reCAPTCHA token (required when reCAPTCHA is enabled in EmailJS)
+    // Front-end reCAPTCHA validation (spam protection)
+    // Note: EmailJS reCAPTCHA is disabled, but we still require users to check the box
     let recaptchaToken = '';
     try {
         if (typeof grecaptcha !== 'undefined') {
@@ -246,7 +247,7 @@ async function submitForm(data) {
         console.error('reCAPTCHA error:', err);
     }
 
-    // If reCAPTCHA is enabled, a token must be present
+    // Require reCAPTCHA checkbox to be checked (spam protection)
     if (!recaptchaToken) {
         console.warn('reCAPTCHA token missing. Please complete the reCAPTCHA.');
         throw new Error('Please complete the reCAPTCHA verification before submitting.');
@@ -264,8 +265,8 @@ async function submitForm(data) {
         message: data.projectDetails,
         subject: `New Contact Form Submission from ${data.firstName} ${data.lastName}`,
         timestamp: new Date().toLocaleString(),
-        reply_to: data.email, // Allows you to reply directly to the sender
-        'g-recaptcha-response': recaptchaToken // Pass token to EmailJS
+        reply_to: data.email // Allows you to reply directly to the sender
+        // Note: 'g-recaptcha-response' not sent since EmailJS reCAPTCHA is disabled
     };
     
     try {
