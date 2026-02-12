@@ -235,6 +235,22 @@ async function submitForm(data) {
     
     // Initialize EmailJS with public key
     emailjs.init(PUBLIC_KEY);
+
+    // Get reCAPTCHA token (required when reCAPTCHA is enabled in EmailJS)
+    let recaptchaToken = '';
+    try {
+        if (typeof grecaptcha !== 'undefined') {
+            recaptchaToken = grecaptcha.getResponse();
+        }
+    } catch (err) {
+        console.error('reCAPTCHA error:', err);
+    }
+
+    // If reCAPTCHA is enabled, a token must be present
+    if (!recaptchaToken) {
+        console.warn('reCAPTCHA token missing. Please complete the reCAPTCHA.');
+        throw new Error('Please complete the reCAPTCHA verification before submitting.');
+    }
     
     // Prepare email template parameters
     // These variable names must match your EmailJS template variables
@@ -248,7 +264,8 @@ async function submitForm(data) {
         message: data.projectDetails,
         subject: `New Contact Form Submission from ${data.firstName} ${data.lastName}`,
         timestamp: new Date().toLocaleString(),
-        reply_to: data.email // Allows you to reply directly to the sender
+        reply_to: data.email, // Allows you to reply directly to the sender
+        'g-recaptcha-response': recaptchaToken // Pass token to EmailJS
     };
     
     try {
